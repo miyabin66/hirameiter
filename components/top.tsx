@@ -1,10 +1,11 @@
 import style from '~/styles/top.module.scss'
+import { useState } from 'react'
 
-const top = () => {
+const top = (props) => {
   return(
     <div className={style.top}>
       <h1>その時、ふと閃いたー</h1>
-      <button>始める</button>
+      <button onClick={() => props.setScene('name')}>始める</button>
     </div>
   )
 }
