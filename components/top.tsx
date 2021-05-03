@@ -1,5 +1,4 @@
 import style from '~/styles/top.module.scss'
-import { useState } from 'react'
 
 const top = (props) => {
   return(
