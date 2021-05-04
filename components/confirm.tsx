@@ -1,10 +1,10 @@
 import {useRef} from 'react'
 import style from '~/styles/background.module.scss'
 
-const complete = (props) => {
+const confirm = (props) => {
   return (
-    <p>complete</p>
+    <p>confirm</p>
   )
 }
 
-export default complete
+export default confirm

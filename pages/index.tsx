@@ -2,12 +2,12 @@ import Default from '~/layouts/default'
 import Top from '~/components/top'
 import Name from '~/components/name'
 import Background from '~/components/background'
-import Complete from '~/components/complete'
+import Confirm from '~/components/confirm'
 import style from '~/styles/index.module.scss'
 import { useState } from 'react'
 
 const index = () => {
-  const [scene, setScene] = useState('name')
+  const [scene, setScene] = useState('background')
   const [name, setName] = useState('')
   const [background, setBackground] = useState('')
   const AppearScene = () => {
@@ -16,10 +16,10 @@ const index = () => {
         return <Top setScene={setScene} />
       case 'name':
         return <Name setScene={setScene} setName={setName} />
-      case 'picture':
+      case 'background':
         return <Background setScene={setScene} setBackground={setBackground} />
-      case 'complete':
-        return <Complete setScene={setScene} name={name} background={background} />
+      case 'confirm':
+        return <Confirm setScene={setScene} name={name} background={background} />
       default:
         break
     }
