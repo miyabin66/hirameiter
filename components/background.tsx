@@ -11,7 +11,15 @@ const background = (props) => {
       case 'select':
         return <BackgroundSelect setBackgroundScene={setBackgroundScene} setSelectedImage={setSelectedImage} />
       case 'edit':
-        return <BackgroundEdit setScene={props.setScene} setBackgroundScene={setBackgroundScene} selectedImage={selectedImage} background={props.background} />
+        return (
+          <BackgroundEdit
+            setScene={props.setScene}
+            setBackgroundScene={setBackgroundScene}
+            selectedImage={selectedImage}
+            setBackground={props.setBackground}
+            background={props.background}
+          />
+        )
       default:
         break
     }
