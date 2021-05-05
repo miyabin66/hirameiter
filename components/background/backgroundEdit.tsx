@@ -9,7 +9,7 @@ const select = (props) => {
   const setImage = () => {
     const imageElement = cropperRef.current
     const cropper = imageElement.cropper
-    props.setBackgroundScene(cropper.getCroppedCanvas().toDataURL())
+    props.setBackground(cropper.getCroppedCanvas().toDataURL())
     props.setScene('confirm')
     props.setBackgroundScene('select')
   }
