@@ -49,7 +49,6 @@ const confirm = (props) => {
   return (
     <div>
       <canvas id='canvas' className={style.confirm__canvas}></canvas>
-      <img src={props.background} className={style.confirm__canvas}></img>
     </div>
   )
 }
