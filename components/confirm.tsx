@@ -17,12 +17,14 @@ const confirm = (props) => {
   })
 
   const init = () => {
-    const width = 750 / 2
-    const height = 1334 / 2
+    const width = 750
+    const height = 1334
 
-    const renderer = new WebGLRenderer({
-      canvas: document.querySelector('canvas')
-    })
+    const canvas = document.querySelector('canvas')
+    canvas.width = width
+    canvas.height = height
+
+    const renderer = new WebGLRenderer({ canvas })
 
     const scene = new Scene()
 
