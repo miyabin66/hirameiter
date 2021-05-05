@@ -31,24 +31,19 @@ const confirm = (props) => {
     const camera = new PerspectiveCamera(90, width / height)
     camera.position.set(0, 0, height / 2)
 
-    const texture = new TextureLoader().load(props.background)
-    const geometry = new PlaneGeometry(width, height)
-    const material = new MeshStandardMaterial({
-      map: texture,
-    })
-    const mesh = new Mesh(geometry, material)
-    scene.add(mesh)
-
     const ambientLight = new AmbientLight(0xffffff)
     scene.add(ambientLight)
 
-    const tick = () => {
-      renderer.render(scene, camera);
+    const texture = new TextureLoader().load(props.background, () => {
+      const geometry = new PlaneGeometry(width, height)
+      const material = new MeshStandardMaterial({
+        map: texture,
+      })
+      const mesh = new Mesh(geometry, material)
+      scene.add(mesh)
 
-      requestAnimationFrame(tick);
-    }
-
-    tick()
+      renderer.render(scene, camera)
+    })
   }
 
   return (
