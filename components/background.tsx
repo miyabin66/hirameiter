@@ -1,13 +1,18 @@
-import {useState} from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import style from '~/styles/background.module.scss'
 import BackgroundSelect from '~/components/background/backgroundSelect'
 import BackgroundEdit from '~/components/background/backgroundEdit'
 
-const background = (props) => {
+type Props = {
+  setScene: Dispatch<SetStateAction<string>>
+  setBackground: Dispatch<SetStateAction<string>>
+}
+
+const background = (props: Props): JSX.Element => {
   const [backgroundScene, setBackgroundScene] = useState('select')
   const [selectedImage, setSelectedImage] = useState('')
   const SetImage = () => {
-    switch(backgroundScene) {
+    switch (backgroundScene) {
       case 'select':
         return (
           <BackgroundSelect
@@ -22,7 +27,6 @@ const background = (props) => {
             setBackgroundScene={setBackgroundScene}
             selectedImage={selectedImage}
             setBackground={props.setBackground}
-            background={props.background}
           />
         )
       default:

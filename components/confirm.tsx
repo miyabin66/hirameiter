@@ -1,4 +1,4 @@
-import {useEffect} from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
   WebGLRenderer,
   Scene,
@@ -6,13 +6,19 @@ import {
   PlaneGeometry,
   MeshStandardMaterial,
   Mesh,
-  AmbientLight
+  AmbientLight,
 } from 'three'
 import readImage from '~/scripts/readImage'
 import { width, height } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
-const confirm = (props) => {
+type Props = {
+  setScene: Dispatch<SetStateAction<string>>
+  name: string
+  background: string
+}
+
+const confirm = (props: Props): JSX.Element => {
   useEffect(() => {
     init()
   })
@@ -45,7 +51,7 @@ const confirm = (props) => {
 
   return (
     <div>
-      <canvas id='canvas' className={style.confirm__canvas}></canvas>
+      <canvas id="canvas" className={style.confirm__canvas}></canvas>
     </div>
   )
 }
