@@ -1,8 +1,9 @@
-const loadImage = (imageSrc, TextureLoader) => {
+import { TextureLoader } from 'three'
+
+const loadImage = (imageSrc: string) => {
   return new Promise((resolve, _reject) => {
-    return new TextureLoader().load(imageSrc, () => {
-      console.log('load')
-      resolve
+    const texture = new TextureLoader().load(imageSrc, () => {
+      resolve(texture)
     })
   })
 }

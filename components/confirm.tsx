@@ -4,10 +4,10 @@ import {
   Scene,
   PerspectiveCamera,
   PlaneGeometry,
-  TextureLoader,
   MeshStandardMaterial,
   Mesh,
-  AmbientLight
+  AmbientLight,
+  Texture
 } from 'three'
 import readImage from '~/scripts/readImage'
 import style from '~/styles/confirm.module.scss'
@@ -35,7 +35,7 @@ const confirm = (props) => {
     const ambientLight = new AmbientLight(0xffffff)
     scene.add(ambientLight)
 
-    const texture = await readImage(props.background, TextureLoader) as any
+    const texture = await readImage(props.background) as Texture
 
     const geometry = new PlaneGeometry(width, height)
     const material = new MeshStandardMaterial({
