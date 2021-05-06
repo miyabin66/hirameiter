@@ -1,7 +1,12 @@
-import { useRef } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 import style from '~/styles/name.module.scss'
 
-const name = (props): JSX.Element => {
+type Props = {
+  setName: Dispatch<SetStateAction<string>>
+  setScene: Dispatch<SetStateAction<string>>
+}
+
+const name = (props: Props): JSX.Element => {
   const nameInput = useRef(null)
   const setName = () => {
     props.setName(nameInput.current.value)

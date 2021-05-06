@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
   WebGLRenderer,
   Scene,
@@ -12,7 +12,13 @@ import readImage from '~/scripts/readImage'
 import { width, height } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
-const confirm = (props): JSX.Element => {
+type Props = {
+  setScene: Dispatch<SetStateAction<string>>
+  name: string
+  background: string
+}
+
+const confirm = (props: Props): JSX.Element => {
   useEffect(() => {
     init()
   })

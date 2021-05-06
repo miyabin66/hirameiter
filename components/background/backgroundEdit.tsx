@@ -1,9 +1,16 @@
-import { useRef } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 import style from '~/styles/background/edit.module.scss'
 
-const select = (props): JSX.Element => {
+type Props = {
+  setBackground: Dispatch<SetStateAction<string>>
+  setScene: Dispatch<SetStateAction<string>>
+  setBackgroundScene: Dispatch<SetStateAction<string>>
+  selectedImage: string
+}
+
+const select = (props: Props): JSX.Element => {
   const cropperRef = useRef(null)
 
   const setImage = () => {

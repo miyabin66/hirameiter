@@ -1,7 +1,12 @@
-import { useRef } from 'react'
+import { Dispatch, SetStateAction, useRef } from 'react'
 import style from '~/styles/background/select.module.scss'
 
-const select = (props): JSX.Element => {
+type Props = {
+  setSelectedImage: Dispatch<SetStateAction<string | ArrayBuffer>>
+  setBackgroundScene: Dispatch<SetStateAction<string>>
+}
+
+const select = (props: Props): JSX.Element => {
   const imageInput = useRef(null)
   const setImage = () => {
     const image = imageInput.current.files[0]
