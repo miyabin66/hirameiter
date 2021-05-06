@@ -9,7 +9,12 @@ const background = (props) => {
   const SetImage = () => {
     switch(backgroundScene) {
       case 'select':
-        return <BackgroundSelect setBackgroundScene={setBackgroundScene} setSelectedImage={setSelectedImage} />
+        return (
+          <BackgroundSelect
+            setBackgroundScene={setBackgroundScene}
+            setSelectedImage={setSelectedImage}
+          />
+        )
       case 'edit':
         return (
           <BackgroundEdit
