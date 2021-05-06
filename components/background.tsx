@@ -1,13 +1,13 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import style from '~/styles/background.module.scss'
 import BackgroundSelect from '~/components/background/backgroundSelect'
 import BackgroundEdit from '~/components/background/backgroundEdit'
 
-const background = (props) => {
+const background = (props): JSX.Element => {
   const [backgroundScene, setBackgroundScene] = useState('select')
   const [selectedImage, setSelectedImage] = useState('')
   const SetImage = () => {
-    switch(backgroundScene) {
+    switch (backgroundScene) {
       case 'select':
         return (
           <BackgroundSelect
