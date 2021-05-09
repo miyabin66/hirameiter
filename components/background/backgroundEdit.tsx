@@ -26,6 +26,7 @@ const select = (props: Props): JSX.Element => {
       <Cropper
         src={props.selectedImage}
         style={{ height: 400, width: '100%' }}
+        viewMode={1}
         aspectRatio={9 / 16}
         ref={cropperRef}
       />
