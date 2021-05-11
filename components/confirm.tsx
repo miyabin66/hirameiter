@@ -3,10 +3,12 @@ import {
   WebGLRenderer,
   Scene,
   PerspectiveCamera,
-  PlaneGeometry,
   MeshStandardMaterial,
   Mesh,
   AmbientLight,
+  PlaneGeometry,
+  Shape,
+  ExtrudeGeometry,
 } from 'three'
 import readImage from '~/scripts/readImage'
 import { width, height } from '~/scripts/variables'
@@ -47,8 +49,34 @@ const confirm = (props: Props): JSX.Element => {
     const mesh_training = new Mesh(geometry_training, material_training)
     scene.add(mesh_training)
 
-    // テキストの白背景
-    const geometry_textbox = new PlaneGeometry(720, 216)
+    const textboxShape = new Shape()
+    textboxShape.arc(
+      -216,
+      -400,
+      108,
+      (Math.PI / 6) * 3,
+      -(Math.PI / 6) * 3,
+      false,
+    )
+    textboxShape.arc(
+      434,
+      108,
+      108,
+      -(Math.PI / 6) * 3,
+      (Math.PI / 6) * 3,
+      false,
+    )
+
+    const extrudeSettings = {
+      amount: 8,
+      bevelEnabled: true,
+      bevelSegments: 2,
+      steps: 2,
+      bevelSize: 1,
+      bevelThickness: 1,
+    }
+
+    const geometry_textbox = new ExtrudeGeometry(textboxShape, extrudeSettings)
     const material_textbox = new MeshStandardMaterial({
       color: '0xFFFFFF',
       opacity: 0.88,
@@ -56,8 +84,6 @@ const confirm = (props: Props): JSX.Element => {
     })
     const mesh_textbox = new Mesh(geometry_textbox, material_textbox)
     scene.add(mesh_textbox)
-
-    mesh_textbox.position.set(0, -400, 0)
 
     renderer.render(scene, camera)
   }
