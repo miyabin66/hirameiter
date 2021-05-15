@@ -11,7 +11,7 @@ import {
   ExtrudeGeometry,
 } from 'three'
 import readImage from '~/scripts/readImage'
-import { width, height } from '~/scripts/variables'
+import { CANVAS, TEXTBOX } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
 type Props = {
@@ -27,22 +27,22 @@ const confirm = (props: Props): JSX.Element => {
 
   const init = async () => {
     const canvas = document.querySelector('canvas')
-    canvas.width = width
-    canvas.height = height
+    canvas.width = CANVAS.width
+    canvas.height = CANVAS.height
 
     const renderer = new WebGLRenderer({ canvas })
 
     const scene = new Scene()
 
-    const camera = new PerspectiveCamera(90, width / height)
-    camera.position.set(0, 0, height / 2)
+    const camera = new PerspectiveCamera(90, CANVAS.width / CANVAS.height)
+    camera.position.set(0, 0, CANVAS.height / 2)
 
     const ambientLight = new AmbientLight(0xffffff)
     scene.add(ambientLight)
 
     // トレーニング画像
     const texture_training = await readImage(props.background)
-    const geometry_training = new PlaneGeometry(width, height)
+    const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
     const material_training = new MeshStandardMaterial({
       map: texture_training,
     })
@@ -51,17 +51,17 @@ const confirm = (props: Props): JSX.Element => {
 
     const textboxShape = new Shape()
     textboxShape.arc(
-      -216,
-      -400,
-      108,
+      TEXTBOX.position.left.x,
+      TEXTBOX.position.left.y,
+      TEXTBOX.radius,
       (Math.PI / 6) * 3,
       -(Math.PI / 6) * 3,
       false,
     )
     textboxShape.arc(
-      434,
-      108,
-      108,
+      TEXTBOX.position.right.x,
+      TEXTBOX.radius,
+      TEXTBOX.radius,
       -(Math.PI / 6) * 3,
       (Math.PI / 6) * 3,
       false,
@@ -83,6 +83,9 @@ const confirm = (props: Props): JSX.Element => {
     })
     const mesh_textbox = new Mesh(geometry_textbox, material_textbox)
     scene.add(mesh_textbox)
+
+    // const points_textboxframe = []
+    // 枠の座標
 
     renderer.render(scene, camera)
   }
