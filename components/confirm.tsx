@@ -69,7 +69,6 @@ const confirm = (props: Props): JSX.Element => {
 
     const extrudeSettings = {
       amount: 8,
-      bevelEnabled: true,
       bevelSegments: 2,
       steps: 2,
       bevelSize: 1,
