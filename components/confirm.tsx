@@ -9,6 +9,10 @@ import {
   PlaneGeometry,
   Shape,
   ExtrudeGeometry,
+  BufferGeometry,
+  LineBasicMaterial,
+  Vector3,
+  Line,
 } from 'three'
 import readImage from '~/scripts/readImage'
 import { CANVAS, TEXTBOX } from '~/scripts/variables'
@@ -41,13 +45,13 @@ const confirm = (props: Props): JSX.Element => {
     scene.add(ambientLight)
 
     // トレーニング画像
-    const texture_training = await readImage(props.background)
-    const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
-    const material_training = new MeshStandardMaterial({
-      map: texture_training,
-    })
-    const mesh_training = new Mesh(geometry_training, material_training)
-    scene.add(mesh_training)
+    // const texture_training = await readImage(props.background)
+    // const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
+    // const material_training = new MeshStandardMaterial({
+    //   map: texture_training,
+    // })
+    // const mesh_training = new Mesh(geometry_training, material_training)
+    // scene.add(mesh_training)
 
     const textboxShape = new Shape()
     textboxShape.arc(
@@ -68,7 +72,7 @@ const confirm = (props: Props): JSX.Element => {
     )
 
     const extrudeSettings = {
-      amount: 8,
+      depth: 10,
       bevelSegments: 2,
       steps: 2,
       bevelSize: 1,
@@ -84,8 +88,51 @@ const confirm = (props: Props): JSX.Element => {
     const mesh_textbox = new Mesh(geometry_textbox, material_textbox)
     scene.add(mesh_textbox)
 
-    // const points_textboxframe = []
-    // 枠の座標
+    const points_textboxframe = []
+    const startPosition = {
+      x: 0,
+      y: 0,
+    }
+    // 左
+    for (let angle = 270; angle >= 90; angle--) {
+      const circleX =
+        TEXTBOX.position.left.x +
+        TEXTBOX.radius * Math.cos(angle * (Math.PI / 180))
+      const circleY =
+        TEXTBOX.position.left.y +
+        TEXTBOX.radius * Math.sin(angle * (Math.PI / 180))
+      if (angle === 270) {
+        startPosition.x = circleX
+        startPosition.y = circleY
+      }
+      points_textboxframe.push(new Vector3(circleX, circleY, 0))
+    }
+    // 右
+    for (let angle = 90; angle >= -90; angle--) {
+      const circleX =
+        TEXTBOX.position.right.x -
+        TEXTBOX.radius * 2 +
+        TEXTBOX.radius * Math.cos(angle * (Math.PI / 180))
+      const circleY =
+        TEXTBOX.position.right.y +
+        TEXTBOX.radius * Math.sin(angle * (Math.PI / 180))
+      points_textboxframe.push(new Vector3(circleX, circleY, 0))
+    }
+    // 1周させる
+    points_textboxframe.push(new Vector3(startPosition.x, startPosition.y, 0))
+
+    const geometry_textboxframe = new BufferGeometry().setFromPoints(
+      points_textboxframe,
+    )
+    const material_textboxframe = new LineBasicMaterial({
+      color: 0x91d57c,
+      linewidth: 10,
+    })
+    const mesh_textboxframe = new Line(
+      geometry_textboxframe,
+      material_textboxframe,
+    )
+    scene.add(mesh_textboxframe)
 
     renderer.render(scene, camera)
   }
