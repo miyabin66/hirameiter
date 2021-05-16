@@ -7,7 +7,7 @@ import Confirm from '~/components/confirm'
 import style from '~/styles/index.module.scss'
 
 const index = (): JSX.Element => {
-  const [scene, setScene] = useState('confirm')
+  const [scene, setScene] = useState('background')
   const [name, setName] = useState('')
   const [background, setBackground] = useState('')
   const AppearScene = () => {

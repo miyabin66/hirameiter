@@ -44,13 +44,13 @@ const confirm = (props: Props): JSX.Element => {
     scene.add(ambientLight)
 
     // トレーニング画像
-    // const texture_training = await readImage(props.background)
-    // const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
-    // const material_training = new MeshStandardMaterial({
-    //   map: texture_training,
-    // })
-    // const mesh_training = new Mesh(geometry_training, material_training)
-    // scene.add(mesh_training)
+    const texture_training = await readImage(props.background)
+    const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
+    const material_training = new MeshStandardMaterial({
+      map: texture_training,
+    })
+    const mesh_training = new Mesh(geometry_training, material_training)
+    scene.add(mesh_training)
 
     const textboxShape = new Shape()
     textboxShape.arc(
@@ -93,7 +93,7 @@ const confirm = (props: Props): JSX.Element => {
       y: 0,
     }
     // 左
-    for (let angle = 270; angle >= 90; angle--) {
+    for (let angle = 270; angle >= 90; angle -= 0.001) {
       const circleX =
         TEXTBOX.position.left.x +
         5 +
@@ -108,7 +108,7 @@ const confirm = (props: Props): JSX.Element => {
       points_textboxframe.push(circleX, circleY, 3)
     }
     // 右
-    for (let angle = 90; angle >= -90; angle--) {
+    for (let angle = 90; angle >= -90; angle -= 0.001) {
       const circleX =
         TEXTBOX.position.right.x +
         5 -
