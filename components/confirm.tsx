@@ -71,7 +71,7 @@ const confirm = (props: Props): JSX.Element => {
     )
 
     const extrudeSettings = {
-      depth: 10,
+      depth: 1,
       bevelSegments: 2,
       steps: 2,
       bevelSize: 1,
@@ -124,7 +124,7 @@ const confirm = (props: Props): JSX.Element => {
     geometry_textboxframe.setPositions(points_textboxframe)
     const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
-      linewidth: 1,
+      linewidth: 0.01,
     })
     const mesh_textboxframe = new Line2(
       geometry_textboxframe,
