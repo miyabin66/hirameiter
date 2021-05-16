@@ -9,11 +9,14 @@ import {
   PlaneGeometry,
   Shape,
   ExtrudeGeometry,
+  BufferAttribute,
   BufferGeometry,
   LineBasicMaterial,
-  Vector3,
   Line,
 } from 'three'
+import { Line2 } from 'three/examples/jsm/lines/Line2.js'
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import readImage from '~/scripts/readImage'
 import { CANVAS, TEXTBOX } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
@@ -81,7 +84,7 @@ const confirm = (props: Props): JSX.Element => {
 
     const geometry_textbox = new ExtrudeGeometry(textboxShape, extrudeSettings)
     const material_textbox = new MeshStandardMaterial({
-      color: '0xFFFFFF',
+      color: 0xffffff,
       opacity: 0.88,
       transparent: true,
     })
@@ -105,7 +108,7 @@ const confirm = (props: Props): JSX.Element => {
         startPosition.x = circleX
         startPosition.y = circleY
       }
-      points_textboxframe.push(new Vector3(circleX, circleY, 0))
+      points_textboxframe.push(circleX, circleY, 0)
     }
     // 右
     for (let angle = 90; angle >= -90; angle--) {
@@ -116,19 +119,21 @@ const confirm = (props: Props): JSX.Element => {
       const circleY =
         TEXTBOX.position.right.y +
         TEXTBOX.radius * Math.sin(angle * (Math.PI / 180))
-      points_textboxframe.push(new Vector3(circleX, circleY, 0))
+      points_textboxframe.push(circleX, circleY, 0)
     }
     // 1周させる
-    points_textboxframe.push(new Vector3(startPosition.x, startPosition.y, 0))
+    points_textboxframe.push(startPosition.x, startPosition.y, 0)
 
-    const geometry_textboxframe = new BufferGeometry().setFromPoints(
-      points_textboxframe,
+    const geometry_textboxframe = new LineGeometry()
+    geometry_textboxframe.setAttribute(
+      'position',
+      new BufferAttribute(new Float32Array(points_textboxframe), 3),
     )
-    const material_textboxframe = new LineBasicMaterial({
+    const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
       linewidth: 10,
     })
-    const mesh_textboxframe = new Line(
+    const mesh_textboxframe = new Line2(
       geometry_textboxframe,
       material_textboxframe,
     )

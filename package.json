@@ -30,6 +30,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "next-transpile-modules": "^7.0.0",
     "node": "^16.0.0",
     "prettier": "^2.2.1",
     "react-cropper": "^2.1.7",
