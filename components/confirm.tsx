@@ -9,11 +9,10 @@ import {
   PlaneGeometry,
   Shape,
   ExtrudeGeometry,
-  BufferGeometry,
-  LineBasicMaterial,
-  Vector3,
-  Line,
 } from 'three'
+import { Line2 } from 'three/examples/jsm/lines/Line2.js'
+import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
+import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import readImage from '~/scripts/readImage'
 import { CANVAS, TEXTBOX } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
@@ -45,13 +44,13 @@ const confirm = (props: Props): JSX.Element => {
     scene.add(ambientLight)
 
     // トレーニング画像
-    // const texture_training = await readImage(props.background)
-    // const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
-    // const material_training = new MeshStandardMaterial({
-    //   map: texture_training,
-    // })
-    // const mesh_training = new Mesh(geometry_training, material_training)
-    // scene.add(mesh_training)
+    const texture_training = await readImage(props.background)
+    const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
+    const material_training = new MeshStandardMaterial({
+      map: texture_training,
+    })
+    const mesh_training = new Mesh(geometry_training, material_training)
+    scene.add(mesh_training)
 
     const textboxShape = new Shape()
     textboxShape.arc(
@@ -72,16 +71,16 @@ const confirm = (props: Props): JSX.Element => {
     )
 
     const extrudeSettings = {
-      depth: 10,
+      depth: 1,
       bevelSegments: 2,
-      steps: 2,
+      steps: 1,
       bevelSize: 1,
       bevelThickness: 1,
     }
 
     const geometry_textbox = new ExtrudeGeometry(textboxShape, extrudeSettings)
     const material_textbox = new MeshStandardMaterial({
-      color: '0xFFFFFF',
+      color: 0xffffff,
       opacity: 0.88,
       transparent: true,
     })
@@ -94,41 +93,42 @@ const confirm = (props: Props): JSX.Element => {
       y: 0,
     }
     // 左
-    for (let angle = 270; angle >= 90; angle--) {
+    for (let angle = 270; angle >= 90; angle -= 0.001) {
       const circleX =
         TEXTBOX.position.left.x +
-        TEXTBOX.radius * Math.cos(angle * (Math.PI / 180))
+        5 +
+        (TEXTBOX.radius + 5) * Math.cos(angle * (Math.PI / 180))
       const circleY =
         TEXTBOX.position.left.y +
-        TEXTBOX.radius * Math.sin(angle * (Math.PI / 180))
+        (TEXTBOX.radius + 5) * Math.sin(angle * (Math.PI / 180))
       if (angle === 270) {
         startPosition.x = circleX
         startPosition.y = circleY
       }
-      points_textboxframe.push(new Vector3(circleX, circleY, 0))
+      points_textboxframe.push(circleX, circleY, 3)
     }
     // 右
-    for (let angle = 90; angle >= -90; angle--) {
+    for (let angle = 90; angle >= -90; angle -= 0.001) {
       const circleX =
-        TEXTBOX.position.right.x -
-        TEXTBOX.radius * 2 +
-        TEXTBOX.radius * Math.cos(angle * (Math.PI / 180))
+        TEXTBOX.position.right.x +
+        5 -
+        (TEXTBOX.radius + 5) * 2 +
+        (TEXTBOX.radius + 5) * Math.cos(angle * (Math.PI / 180))
       const circleY =
         TEXTBOX.position.right.y +
-        TEXTBOX.radius * Math.sin(angle * (Math.PI / 180))
-      points_textboxframe.push(new Vector3(circleX, circleY, 0))
+        (TEXTBOX.radius + 5) * Math.sin(angle * (Math.PI / 180))
+      points_textboxframe.push(circleX, circleY, 3)
     }
     // 1周させる
-    points_textboxframe.push(new Vector3(startPosition.x, startPosition.y, 0))
+    points_textboxframe.push(startPosition.x, startPosition.y, 3)
 
-    const geometry_textboxframe = new BufferGeometry().setFromPoints(
-      points_textboxframe,
-    )
-    const material_textboxframe = new LineBasicMaterial({
+    const geometry_textboxframe = new LineGeometry()
+    geometry_textboxframe.setPositions(points_textboxframe)
+    const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
-      linewidth: 10,
+      linewidth: 0.008,
     })
-    const mesh_textboxframe = new Line(
+    const mesh_textboxframe = new Line2(
       geometry_textboxframe,
       material_textboxframe,
     )
