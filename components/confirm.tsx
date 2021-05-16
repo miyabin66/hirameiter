@@ -9,10 +9,6 @@ import {
   PlaneGeometry,
   Shape,
   ExtrudeGeometry,
-  BufferAttribute,
-  BufferGeometry,
-  LineBasicMaterial,
-  Line,
 } from 'three'
 import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
@@ -125,13 +121,10 @@ const confirm = (props: Props): JSX.Element => {
     points_textboxframe.push(startPosition.x, startPosition.y, 0)
 
     const geometry_textboxframe = new LineGeometry()
-    geometry_textboxframe.setAttribute(
-      'position',
-      new BufferAttribute(new Float32Array(points_textboxframe), 3),
-    )
+    geometry_textboxframe.setPositions(points_textboxframe)
     const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
-      linewidth: 10,
+      linewidth: 1,
     })
     const mesh_textboxframe = new Line2(
       geometry_textboxframe,
