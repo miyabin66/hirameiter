@@ -134,6 +134,9 @@ const confirm = (props: Props): JSX.Element => {
     )
     scene.add(mesh_textboxframe)
 
+    const ctx = document.createElement('canvas').getContext('2d')
+    ctx.strokeText('Hello world', 10, 50)
+
     renderer.render(scene, camera)
   }
 
