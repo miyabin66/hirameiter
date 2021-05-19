@@ -14,7 +14,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import readImage from '~/scripts/readImage'
-import { CANVAS, TEXTBOX } from '~/scripts/variables'
+import { CANVAS, TEXTBOX, SAMPLE } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
 type Props = {
@@ -44,7 +44,7 @@ const confirm = (props: Props): JSX.Element => {
     scene.add(ambientLight)
 
     // トレーニング画像
-    const texture_training = await readImage(props.background)
+    const texture_training = await readImage(SAMPLE) // props.background
     const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
     const material_training = new MeshStandardMaterial({
       map: texture_training,
@@ -96,11 +96,11 @@ const confirm = (props: Props): JSX.Element => {
     for (let angle = 270; angle >= 90; angle -= 0.001) {
       const circleX =
         TEXTBOX.position.left.x +
-        5 +
-        (TEXTBOX.radius + 5) * Math.cos(angle * (Math.PI / 180))
+        3 +
+        (TEXTBOX.radius + 3) * Math.cos(angle * (Math.PI / 180))
       const circleY =
         TEXTBOX.position.left.y +
-        (TEXTBOX.radius + 5) * Math.sin(angle * (Math.PI / 180))
+        (TEXTBOX.radius + 3) * Math.sin(angle * (Math.PI / 180))
       if (angle === 270) {
         startPosition.x = circleX
         startPosition.y = circleY
@@ -111,12 +111,12 @@ const confirm = (props: Props): JSX.Element => {
     for (let angle = 90; angle >= -90; angle -= 0.001) {
       const circleX =
         TEXTBOX.position.right.x +
-        5 -
-        (TEXTBOX.radius + 5) * 2 +
-        (TEXTBOX.radius + 5) * Math.cos(angle * (Math.PI / 180))
+        3 -
+        (TEXTBOX.radius + 3) * 2 +
+        (TEXTBOX.radius + 3) * Math.cos(angle * (Math.PI / 180))
       const circleY =
         TEXTBOX.position.right.y +
-        (TEXTBOX.radius + 5) * Math.sin(angle * (Math.PI / 180))
+        (TEXTBOX.radius + 3) * Math.sin(angle * (Math.PI / 180))
       points_textboxframe.push(circleX, circleY, 3)
     }
     // 1周させる
@@ -126,7 +126,7 @@ const confirm = (props: Props): JSX.Element => {
     geometry_textboxframe.setPositions(points_textboxframe)
     const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
-      linewidth: 0.008,
+      linewidth: 0.004,
     })
     const mesh_textboxframe = new Line2(
       geometry_textboxframe,
