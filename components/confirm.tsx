@@ -127,6 +127,7 @@ const confirm = (props: Props): JSX.Element => {
     const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
       linewidth: 0.004,
+      alphaTest: 1.0,
     })
     const mesh_textboxframe = new Line2(
       geometry_textboxframe,
