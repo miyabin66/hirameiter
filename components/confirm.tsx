@@ -139,6 +139,7 @@ const confirm = (props: Props): JSX.Element => {
 
   return (
     <div>
+      <p>完成</p>
       <canvas id="canvas" className={style.confirm__canvas}></canvas>
     </div>
   )
