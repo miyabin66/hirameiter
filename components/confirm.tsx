@@ -144,16 +144,16 @@ const confirm = (props: Props): JSX.Element => {
     ctx_text.beginPath()
     ctx_text.font = `bold ${TEXT.fontSize}px NewRodinPro-B`
     ctx_text.fillStyle = '#764724'
-    ctx_text.fillText('その時、ふと閃いた！', 0, TEXT.y + TEXT.fontSize)
+    ctx_text.fillText('その時、ふと閃いた！', 0, TEXT.posY + TEXT.fontSize)
     ctx_text.fillText(
       `このアイディアは、${props.name}との`,
       0,
-      TEXT.y + TEXT.fontSize * 2 + TEXT.lineHeight,
+      TEXT.posY + TEXT.fontSize * 2 + TEXT.lineHeight,
     )
     ctx_text.fillText(
       'トレーニングに活かせるかもしれない！',
       0,
-      TEXT.y + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
+      TEXT.posY + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
     )
     document.body.appendChild(canvas_text)
     const texture_text = await readImage(canvas_text.toDataURL('image/png'))

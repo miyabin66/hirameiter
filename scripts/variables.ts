@@ -20,8 +20,7 @@ export const TEXTBOX = {
 export const TEXT = {
   fontSize: 25,
   lineHeight: 15,
-  x: 0,
-  y: 50,
+  posY: 50,
 }
 
 export const STATE = {
