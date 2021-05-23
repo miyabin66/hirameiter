@@ -15,7 +15,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import readImage from '~/scripts/readImage'
-import { CANVAS, TEXTBOX, SAMPLE } from '~/scripts/variables'
+import { CANVAS, TEXTBOX, TEXT, SAMPLE } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
 type Props = {
@@ -138,14 +138,23 @@ const confirm = (props: Props): JSX.Element => {
     scene.add(mesh_textboxframe)
 
     const canvas_text = document.createElement('canvas')
-    canvas_text.width = 500
+    canvas_text.width = 525
     canvas_text.height = 200
     const ctx_text = canvas_text.getContext('2d')
     ctx_text.beginPath()
-    ctx_text.clearRect(0, 0, 500, 200)
-    ctx_text.font = '25px NewRodinPro-B'
+    ctx_text.font = `bold ${TEXT.fontSize}px NewRodinPro-B`
     ctx_text.fillStyle = '#764724'
-    ctx_text.fillText(props.name, 0, 60)
+    ctx_text.fillText('その時、ふと閃いた！', 0, TEXT.y + TEXT.fontSize)
+    ctx_text.fillText(
+      `このアイディアは、${props.name}との`,
+      0,
+      TEXT.y + TEXT.fontSize * 2 + TEXT.lineHeight,
+    )
+    ctx_text.fillText(
+      'トレーニングに活かせるかもしれない！',
+      0,
+      TEXT.y + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
+    )
     document.body.appendChild(canvas_text)
     const texture_text = await readImage(canvas_text.toDataURL('image/png'))
     const geometry_text = new PlaneGeometry(
