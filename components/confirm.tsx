@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useEffect } from 'react'
 import {
   WebGLRenderer,
   Scene,
+  Color,
   PerspectiveCamera,
   MeshStandardMaterial,
   Mesh,
@@ -14,7 +15,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import readImage from '~/scripts/readImage'
-import { CANVAS, TEXTBOX, SAMPLE } from '~/scripts/variables'
+import { CANVAS, TEXTBOX, TEXT, SAMPLE } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
 type Props = {
@@ -33,9 +34,10 @@ const confirm = (props: Props): JSX.Element => {
     canvas.width = CANVAS.width
     canvas.height = CANVAS.height
 
-    const renderer = new WebGLRenderer({ canvas })
+    const renderer = new WebGLRenderer({ canvas, alpha: true })
 
     const scene = new Scene()
+    scene.background = new Color(0xff0000)
 
     const camera = new PerspectiveCamera(90, CANVAS.width / CANVAS.height)
     camera.position.set(0, 0, CANVAS.height / 2)
@@ -93,7 +95,7 @@ const confirm = (props: Props): JSX.Element => {
       y: 0,
     }
     // 左
-    for (let angle = 270; angle >= 90; angle -= 0.001) {
+    for (let angle = 270; angle >= 90; angle -= 0.0005) {
       const circleX =
         TEXTBOX.position.left.x +
         3 +
@@ -108,7 +110,7 @@ const confirm = (props: Props): JSX.Element => {
       points_textboxframe.push(circleX, circleY, 3)
     }
     // 右
-    for (let angle = 90; angle >= -90; angle -= 0.001) {
+    for (let angle = 90; angle >= -90; angle -= 0.0005) {
       const circleX =
         TEXTBOX.position.right.x +
         3 -
@@ -126,13 +128,48 @@ const confirm = (props: Props): JSX.Element => {
     geometry_textboxframe.setPositions(points_textboxframe)
     const material_textboxframe = new LineMaterial({
       color: 0x91d57c,
-      linewidth: 0.004,
+      linewidth: 0.006,
+      alphaTest: 1.0,
     })
     const mesh_textboxframe = new Line2(
       geometry_textboxframe,
       material_textboxframe,
     )
     scene.add(mesh_textboxframe)
+
+    const canvas_text = document.createElement('canvas')
+    canvas_text.width = 525
+    canvas_text.height = 200
+    const ctx_text = canvas_text.getContext('2d')
+    ctx_text.beginPath()
+    ctx_text.font = `bold ${TEXT.fontSize}px NewRodinPro-B`
+    ctx_text.fillStyle = '#764724'
+    ctx_text.fillText('その時、ふと閃いた！', 0, TEXT.posY + TEXT.fontSize)
+    ctx_text.fillText(
+      `このアイディアは、${props.name}との`,
+      0,
+      TEXT.posY + TEXT.fontSize * 2 + TEXT.lineHeight,
+    )
+    ctx_text.fillText(
+      'トレーニングに活かせるかもしれない！',
+      0,
+      TEXT.posY + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
+    )
+    document.body.appendChild(canvas_text)
+    const texture_text = await readImage(canvas_text.toDataURL('image/png'))
+    const geometry_text = new PlaneGeometry(
+      canvas_text.width,
+      canvas_text.height,
+    )
+    const material_text = new MeshStandardMaterial({
+      color: 0xffffff,
+      map: texture_text,
+      transparent: true,
+      depthTest: false,
+    })
+    const mesh_text = new Mesh(geometry_text, material_text)
+    mesh_text.position.set(0, -400, 3)
+    scene.add(mesh_text)
 
     renderer.render(scene, camera)
   }
