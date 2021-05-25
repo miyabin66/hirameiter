@@ -24,8 +24,8 @@ export const TEXT = {
 }
 
 export const STATE = {
-  scene: 'confirm',
-  name: 'メジロマックイーン',
+  scene: 'top',
+  name: '',
 }
 
 export const SAMPLE =

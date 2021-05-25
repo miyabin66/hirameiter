@@ -15,7 +15,7 @@ import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
 import readImage from '~/scripts/readImage'
-import { CANVAS, TEXTBOX, TEXT, SAMPLE } from '~/scripts/variables'
+import { CANVAS, TEXTBOX, TEXT } from '~/scripts/variables'
 import style from '~/styles/confirm.module.scss'
 
 type Props = {
@@ -46,7 +46,7 @@ const confirm = (props: Props): JSX.Element => {
     scene.add(ambientLight)
 
     // トレーニング画像
-    const texture_training = await readImage(SAMPLE) // props.background
+    const texture_training = await readImage(props.background)
     const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
     const material_training = new MeshStandardMaterial({
       map: texture_training,
@@ -176,7 +176,7 @@ const confirm = (props: Props): JSX.Element => {
 
   return (
     <div>
-      <p>完成</p>
+      <p>こちらでよろしいですか？</p>
       <canvas id="canvas" className={style.confirm__canvas}></canvas>
     </div>
   )

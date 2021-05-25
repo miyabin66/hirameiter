@@ -14,6 +14,7 @@ const name = (props: Props): JSX.Element => {
   }
   return (
     <div className={style.name}>
+      <p>一緒にトレーニングしている娘の名前を教えてください</p>
       <input type="text" className={style.name__input} ref={nameInput}></input>
       <button onClick={setName}>次へ</button>
     </div>
