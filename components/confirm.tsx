@@ -155,7 +155,6 @@ const confirm = (props: Props): JSX.Element => {
       0,
       TEXT.posY + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
     )
-    document.body.appendChild(canvas_text)
     const texture_text = await readImage(canvas_text.toDataURL('image/png'))
     const geometry_text = new PlaneGeometry(
       canvas_text.width,
@@ -176,7 +175,7 @@ const confirm = (props: Props): JSX.Element => {
 
   return (
     <div>
-      <p>こちらでよろしいですか？</p>
+      <p>こんな感じでいいか？</p>
       <canvas id="canvas" className={style.confirm__canvas}></canvas>
     </div>
   )
