@@ -1,4 +1,12 @@
-import { Dispatch, SetStateAction, useRef } from 'react'
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useRef,
+  useState,
+} from 'react'
 import style from '~/styles/name.module.scss'
 
 type Props = {
@@ -8,15 +16,62 @@ type Props = {
 
 const name = (props: Props): JSX.Element => {
   const nameInput = useRef(null)
-  const setName = () => {
+  const [isEmpty, setIsEmpty] = useState(false)
+  const [isLimitOver, setIsLimitOver] = useState(false)
+  const setName = (): void => {
     props.setName(nameInput.current.value)
     props.setScene('background')
   }
+  const validation: ChangeEventHandler<HTMLInputElement> = (
+    e: ChangeEvent<HTMLInputElement>,
+  ) => {
+    if (!e.currentTarget.value) {
+      return setIsEmpty(true)
+    }
+    if (e.currentTarget.value.length > 10) {
+      return setIsLimitOver(true)
+    }
+    if (isEmpty || isLimitOver) {
+      setIsEmpty(false)
+      setIsLimitOver(false)
+    }
+  }
+  const Empty = useCallback(() => {
+    if (isEmpty) {
+      return (
+        <p>
+          おいおい何も入力してねーじゃねえか！
+          <br />
+          ボタン押させねーぞ！
+        </p>
+      )
+    }
+    return <></>
+  }, [isEmpty])
+  const LimitOver = useCallback(() => {
+    if (isLimitOver) {
+      return (
+        <p>
+          10文字以内にしろよ！
+          <br />
+          そうしねーとボタン隠したままにするぞ！
+        </p>
+      )
+    }
+    return <></>
+  }, [isLimitOver])
   return (
     <div className={style.name}>
-      <p>一緒にトレーニングしている娘の名前を教えてください</p>
-      <input type="text" className={style.name__input} ref={nameInput}></input>
+      <p>トレーニングしてる奴の名前を入れてくれよな！</p>
+      <input
+        type="text"
+        className={style.name__input}
+        ref={nameInput}
+        onChange={validation}
+      ></input>
       <button onClick={setName}>次へ</button>
+      <Empty />
+      <LimitOver />
     </div>
   )
 }
