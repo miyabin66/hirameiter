@@ -36,7 +36,7 @@ const name = (props: Props): JSX.Element => {
       setIsLimitOver(false)
     }
   }
-  const Empty = useCallback(() => {
+  const Empty: () => JSX.Element = useCallback(() => {
     if (isEmpty) {
       return (
         <p>
@@ -48,7 +48,7 @@ const name = (props: Props): JSX.Element => {
     }
     return <></>
   }, [isEmpty])
-  const LimitOver = useCallback(() => {
+  const LimitOver: () => JSX.Element = useCallback(() => {
     if (isLimitOver) {
       return (
         <p>
