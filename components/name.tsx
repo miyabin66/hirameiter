@@ -7,6 +7,7 @@ import {
   useRef,
   useState,
 } from 'react'
+import split from 'graphemesplit'
 import style from '~/styles/name.module.scss'
 
 type Props = {
@@ -28,7 +29,7 @@ const name = (props: Props): JSX.Element => {
     if (!e.currentTarget.value) {
       return setIsEmpty(true)
     }
-    if (e.currentTarget.value.length > 10) {
+    if (split(e.currentTarget.value).length > 10) {
       return setIsLimitOver(true)
     }
     if (isEmpty || isLimitOver) {
