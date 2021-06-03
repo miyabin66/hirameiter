@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect } from 'react'
+import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import {
   WebGLRenderer,
   Scene,
@@ -20,11 +20,13 @@ import style from '~/styles/confirm.module.scss'
 
 type Props = {
   setScene: Dispatch<SetStateAction<string>>
+  setComplete: Dispatch<SetStateAction<string>>
   name: string
   background: string
 }
 
 const confirm = (props: Props): JSX.Element => {
+  const canvas = useRef<HTMLCanvasElement>()
   useEffect(() => {
     init()
   })
@@ -34,7 +36,11 @@ const confirm = (props: Props): JSX.Element => {
     canvas.width = CANVAS.width
     canvas.height = CANVAS.height
 
-    const renderer = new WebGLRenderer({ canvas, alpha: true })
+    const renderer = new WebGLRenderer({
+      canvas,
+      alpha: true,
+      preserveDrawingBuffer: true,
+    })
 
     const scene = new Scene()
     scene.background = new Color(0xff0000)
@@ -173,10 +179,20 @@ const confirm = (props: Props): JSX.Element => {
     renderer.render(scene, camera)
   }
 
+  const clickConfirm = () => {
+    props.setComplete(canvas.current.toDataURL())
+    props.setScene('complete')
+  }
+
   return (
     <div>
       <p>こんな感じでいいか？</p>
-      <canvas id="canvas" className={style.confirm__canvas}></canvas>
+      <canvas
+        id="canvas"
+        ref={canvas}
+        className={style.confirm__canvas}
+      ></canvas>
+      <button onClick={clickConfirm}>OK</button>
     </div>
   )
 }
