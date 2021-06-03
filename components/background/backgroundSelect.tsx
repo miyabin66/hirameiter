@@ -19,7 +19,11 @@ const select = (props: Props): JSX.Element => {
   }
   return (
     <div className={style.backgroundSelect}>
-      <p>トレーニング風景を選択してください</p>
+      <p>
+        トレーニング風景を選んでくれ！
+        <br />
+        無かったらお前の好きなUMAの写真でいいぞ
+      </p>
       <input
         type="file"
         accept="image/*"
