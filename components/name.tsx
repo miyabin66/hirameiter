@@ -30,6 +30,7 @@ const name = (props: Props): JSX.Element => {
       return setIsEmpty(true)
     }
     if (split(e.currentTarget.value).length > 10) {
+      console.log(0)
       return setIsLimitOver(true)
     }
     if (isEmpty || isLimitOver) {
@@ -41,7 +42,7 @@ const name = (props: Props): JSX.Element => {
     if (isEmpty) {
       return (
         <p>
-          おいおい何も入力してねーじゃねえか！
+          何も入力してねーじゃねえか！
           <br />
           ボタン押させねーぞ！
         </p>
@@ -53,7 +54,7 @@ const name = (props: Props): JSX.Element => {
     if (isLimitOver) {
       return (
         <p>
-          10文字以内にしろよ！
+          おいおい10文字以内にしろよ！
           <br />
           そうしねーとボタン隠したままにするぞ！
         </p>
@@ -63,14 +64,25 @@ const name = (props: Props): JSX.Element => {
   }, [isLimitOver])
   return (
     <div className={style.name}>
-      <p>トレーニングしてる奴の名前を入れてくれよな！</p>
+      <p>
+        トレーニングしてる奴の名前を入れてくれよな！
+        <br />
+        10文字までしか入らねーから気をつけろよ
+      </p>
       <input
         type="text"
         className={style.name__input}
         ref={nameInput}
         onChange={validation}
       ></input>
-      <button onClick={setName}>次へ</button>
+      <button
+        className={style.name__button}
+        onClick={setName}
+        data-isempty={isEmpty}
+        data-islimitover={isLimitOver}
+      >
+        次へ
+      </button>
       <Empty />
       <LimitOver />
     </div>

@@ -22,7 +22,7 @@ const select = (props: Props): JSX.Element => {
       <p>
         トレーニング風景を選んでくれ！
         <br />
-        無かったらお前の好きなUMAの写真でいいぞ
+        無かったらお前の好きなUMAの写真でもいいぞ
       </p>
       <input
         type="file"
