@@ -1,0 +1,12 @@
+.name {
+  &__button {
+    &[data-isempty='true'] {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+    &[data-islimitover='true'] {
+      pointer-events: none;
+      opacity: 0;
+    }
+  }
+}
