@@ -1,6 +1,7 @@
+import fs from 'fs'
 import Twitter from 'twitter'
 import dotenv from 'dotenv'
-import { NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from 'next'
 import axios from 'axios'
 
 dotenv.config()
@@ -18,36 +19,23 @@ interface twitter {
 }
 
 const upload = async (
-  {
-    image,
-  }: {
-    image: string
-  },
+  req: NextApiRequest,
   res: NextApiResponse,
 ): Promise<null> => {
-  // const twitterRes: AxiosResponse<twitter> = await axios.post(
-  //   'https://upload.twitter.com/1.1/media/upload.json',
-  //   {
-  //     media_data: image,
-  //   },
-  //   {
-  //     headers: {
-  //       'Content-Type': 'multipart/form-data;',
-  //     },
-  //   },
-  // )
-  // console.log(twitterRes)
-  // res.status(200).json({ id: twitterRes.data.media_id_string })
   const client = new Twitter({
-    consumer_key: process.env.CONSUMER_KEY,
-    consumer_secret: process.env.CONSUMER_SECRET,
-    access_token_key: process.env.ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.ACCESS_TOKEN_SECRET,
+    consumer_key: process.env.TWITTER_CONSUMER_KEY,
+    consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+    // bearer_token: process.env.TWITTER_BEARER_TOKEN,
+    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
   })
-  client.post('media/upload', { media: image }, (error, media) => {
+  const params = { media_data: req.body.image }
+  client.post('media/upload', params, (error, media, response) => {
     if (error) {
+      console.log(response.errors)
       console.log(error)
     }
+    console.log(media)
     res.send({ id: media.media_id_string })
   })
   return
