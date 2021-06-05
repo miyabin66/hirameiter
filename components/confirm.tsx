@@ -180,7 +180,7 @@ const confirm = (props: Props): JSX.Element => {
   }
 
   const clickConfirm = () => {
-    props.setComplete(canvas.current.toDataURL())
+    props.setComplete(canvas.current.toDataURL('image/jpeg'))
     props.setScene('complete')
   }
 
