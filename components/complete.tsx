@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios'
 import style from '~/styles/complete.module.scss'
+import { createTwitterIntent } from '~/scripts/twitterShare'
 
 type Props = {
   complete: string
@@ -15,6 +16,11 @@ const complete = (props: Props): JSX.Element => {
       image: props.complete,
     })
     console.log(res.data.id)
+    createTwitterIntent({
+      url: 'https://hirameiter.vercel.app/',
+      text: `トレーニング中だぞ！ by 自称宣伝部長 `,
+      hashtags: ['ひらめいたー'].join(','),
+    })
   }
   return (
     <div>
