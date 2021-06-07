@@ -14,16 +14,14 @@ const upload = async (
     access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
   })
-  client.post(
-    'media/upload',
-    {
-      media_data: req.body.image.split(',')[1],
-    },
-    (error, media) => {
-      res.send({ id: media.media_id_string })
-    },
-  )
-  return
+  const media = await client.post('media/upload', {
+    media_data: req.body.image.split(',')[1],
+  })
+  const post = await client.post('statuses/update', {
+    status: `${new Date()}`,
+    media_ids: media.media_id_string,
+  })
+  return res.send({ id: post })
 }
 
 export default upload
