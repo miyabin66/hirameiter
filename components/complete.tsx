@@ -7,7 +7,7 @@ type Props = {
 }
 
 type upload = {
-  id: string
+  url: string
 }
 
 const complete = (props: Props): JSX.Element => {
@@ -15,12 +15,14 @@ const complete = (props: Props): JSX.Element => {
     const res: AxiosResponse<upload> = await axios.post('/api/upload', {
       image: props.complete,
     })
-    console.log(res.data.id)
-    // createTwitterIntent({
-    //   url: 'https://hirameiter.vercel.app/',
-    //   text: `トレーニング中だぞ！ by 自称宣伝部長 `,
-    //   hashtags: ['ひらめいたー'].join(','),
-    // })
+    window.open(
+      createTwitterIntent({
+        url: 'https://hirameiter.vercel.app/',
+        text: `トレーニング中だぞ！ by 自称宣伝部長 ${res.data.url}`,
+        hashtags: ['ひらめいたー'].join(','),
+      }),
+      '_blank',
+    )
   }
   return (
     <div>

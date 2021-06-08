@@ -21,7 +21,7 @@ const upload = async (
     status: `${new Date()}`,
     media_ids: media.media_id_string,
   })
-  return res.send({ id: post })
+  return res.send({ url: post.entities.media[0].url })
 }
 
 export default upload
