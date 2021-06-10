@@ -27,7 +27,7 @@ const complete = (props: Props): JSX.Element => {
         完成だ！早速隣近所にバラまいて来ようぜ！
       </p>
       <img className={style.complete__image} src={props.complete} alt="" />
-      <button onClick={uploadImage}>twitter</button>
+      <button onClick={uploadImage}>Twitterに投稿する</button>
     </div>
   )
 }
