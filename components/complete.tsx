@@ -18,7 +18,7 @@ const complete = (props: Props): JSX.Element => {
     window.open(
       createTwitterIntent({
         url: 'https://hirameiter.vercel.app/',
-        text: `トレーニング中だぞ！ by 自称宣伝部長 ${res.data.url}`,
+        text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
         hashtags: ['ひらめいたー'].join(','),
       }),
       '_blank',
