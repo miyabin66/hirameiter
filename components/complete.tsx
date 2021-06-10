@@ -15,14 +15,11 @@ const complete = (props: Props): JSX.Element => {
     const res: AxiosResponse<upload> = await axios.post('/api/upload', {
       image: props.complete,
     })
-    window.open(
-      createTwitterIntent({
-        url: 'https://hirameiter.vercel.app/',
-        text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
-        hashtags: ['ひらめいたー'].join(','),
-      }),
-      '_blank',
-    )
+    window.location.href = createTwitterIntent({
+      url: 'https://hirameiter.vercel.app/',
+      text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
+      hashtags: ['ひらめいたー'].join(','),
+    })
   }
   return (
     <div className={style.complete}>
