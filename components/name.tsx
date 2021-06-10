@@ -41,7 +41,7 @@ const name = (props: Props): JSX.Element => {
   const Empty: () => JSX.Element = useCallback(() => {
     if (isEmpty) {
       return (
-        <p>
+        <p className={style.name__error}>
           何も入力してねーじゃねえか！
           <br />
           ボタン押させねーぞ！
@@ -53,7 +53,7 @@ const name = (props: Props): JSX.Element => {
   const LimitOver: () => JSX.Element = useCallback(() => {
     if (isLimitOver) {
       return (
-        <p>
+        <p className={style.name__error}>
           おいおい10文字以内にしろよ！
           <br />
           そうしねーとボタン隠したままにするぞ！
@@ -64,25 +64,25 @@ const name = (props: Props): JSX.Element => {
   }, [isLimitOver])
   return (
     <div className={style.name}>
-      <p>
-        トレーニングしてる奴の名前を入れてくれよな！
-        <br />
-        10文字までしか入らねーから気をつけろよ
+      <p className={style.name__text}>
+        トレーニングしてる奴の名前を入れてくれよな！ちなみに10文字までしか認めねーぞ
       </p>
-      <input
-        type="text"
-        className={style.name__input}
-        ref={nameInput}
-        onChange={validation}
-      ></input>
-      <button
-        className={style.name__button}
-        onClick={setName}
-        data-isempty={isEmpty}
-        data-islimitover={isLimitOver}
-      >
-        次へ
-      </button>
+      <div className={style.name__wrap}>
+        <input
+          type="text"
+          className={style.name__input}
+          ref={nameInput}
+          onChange={validation}
+        ></input>
+        <button
+          className={style.name__button}
+          onClick={setName}
+          data-isempty={isEmpty}
+          data-islimitover={isLimitOver}
+        >
+          次へ
+        </button>
+      </div>
       <Empty />
       <LimitOver />
     </div>

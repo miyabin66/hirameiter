@@ -1,4 +1,23 @@
+@import "variables";
+
 .name {
+  width: $content-width;
+  font-family: $font-family;
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__input {
+    -webkit-appearance: none;
+    box-sizing: border-box;
+    width: 250px;
+    height: 50px;
+    font-size: 20px;
+  }
+  &__error {
+    color: red;
+  }
   &__button {
     &[data-isempty='true'] {
       pointer-events: none;
