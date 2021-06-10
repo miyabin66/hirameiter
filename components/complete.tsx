@@ -25,9 +25,11 @@ const complete = (props: Props): JSX.Element => {
     )
   }
   return (
-    <div>
-      <p>完成だ！早速隣近所にバラまいて来ようぜ！</p>
-      <img className={style.image} src={props.complete} alt="" />
+    <div className={style.complete}>
+      <p className={style.complete__text}>
+        完成だ！早速隣近所にバラまいて来ようぜ！
+      </p>
+      <img className={style.complete__image} src={props.complete} alt="" />
       <button onClick={uploadImage}>twitter</button>
     </div>
   )

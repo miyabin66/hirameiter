@@ -24,8 +24,8 @@ export const TEXT = {
 }
 
 export const STATE = {
-  scene: 'name',
-  name: '',
+  scene: 'background',
+  name: 'go',
   background: '',
   complete: '',
 }

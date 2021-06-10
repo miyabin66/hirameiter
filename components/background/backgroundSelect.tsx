@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction, useRef } from 'react'
-import style from '~/styles/background/select.module.scss'
+import style from '~/styles/background.module.scss'
 
 type Props = {
   setSelectedImage: Dispatch<SetStateAction<string | ArrayBuffer>>
@@ -18,8 +18,8 @@ const select = (props: Props): JSX.Element => {
     reader.readAsDataURL(image)
   }
   return (
-    <div className={style.backgroundSelect}>
-      <p>
+    <div>
+      <p className={style.background__text}>
         トレーニング風景を選んでくれ！
         <br />
         無かったらお前の好きなUMAの写真でもいいぞ
@@ -27,7 +27,6 @@ const select = (props: Props): JSX.Element => {
       <input
         type="file"
         accept="image/*"
-        className={style.backgroundSelect__input}
         onChange={setImage}
         ref={imageInput}
       />

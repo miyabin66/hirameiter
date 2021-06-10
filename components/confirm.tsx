@@ -185,8 +185,8 @@ const confirm = (props: Props): JSX.Element => {
   }
 
   return (
-    <div>
-      <p>こんな感じでいいか？</p>
+    <div className={style.confirm}>
+      <p className={style.confirm__text}>こんな感じでいいか？</p>
       <canvas
         id="canvas"
         ref={canvas}

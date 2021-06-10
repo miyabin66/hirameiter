@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useRef } from 'react'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
-import style from '~/styles/background/edit.module.scss'
 
 type Props = {
   setBackground: Dispatch<SetStateAction<string>>
@@ -22,10 +21,10 @@ const select = (props: Props): JSX.Element => {
   }
 
   return (
-    <div className={style.edit}>
+    <div>
       <Cropper
         src={props.selectedImage}
-        style={{ height: 400, width: '100%' }}
+        style={{ height: 400, width: '325px' }}
         viewMode={1}
         aspectRatio={9 / 16}
         ref={cropperRef}

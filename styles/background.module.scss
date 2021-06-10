@@ -1,0 +1,8 @@
+@import "variables";
+
+.background {
+  width: $content-width;
+  &__text {
+    font-family: $font-family;
+  }
+}

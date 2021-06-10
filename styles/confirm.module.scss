@@ -1,6 +1,12 @@
+@import "variables";
+
 .confirm {
+  width: $content-width;
   &__canvas {
-    width: calc(750px / 2);
-    height: calc(1334px / 2);
+    width: 100%;
+    height: calc(1147px / 2);
+  }
+  &__text {
+    font-family: $font-family;
   }
 }
