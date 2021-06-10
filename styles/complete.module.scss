@@ -1,6 +1,12 @@
-.image {
-  width: sp-convert(650 / 2);
-  max-width: calc(650px / 2);
-  height: sp-convert(1147 / 2);
-  max-height: calc(1147px / 2);
+@import "variables";
+
+.complete {
+  width: $content-width;
+  &__image {
+    width: calc(650px / 2);
+    height: calc(1147px / 2);
+  }
+  &__text {
+    font-family: $font-family;
+  }
 }
