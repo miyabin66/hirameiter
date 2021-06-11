@@ -31,7 +31,7 @@ const index = (): JSX.Element => {
           />
         )
       case 'complete':
-        return <Complete complete={complete} />
+        return <Complete complete={complete} setScene={setScene} />
       default:
         break
     }

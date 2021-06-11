@@ -8,5 +8,11 @@
   }
   &__text {
     font-family: $font-family;
+    color: $font-color;
+  }
+  &__wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

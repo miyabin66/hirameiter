@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useRef } from 'react'
 import style from '~/styles/background.module.scss'
 
 type Props = {
+  setScene: Dispatch<SetStateAction<string>>
   setSelectedImage: Dispatch<SetStateAction<string | ArrayBuffer>>
   setBackgroundScene: Dispatch<SetStateAction<string>>
 }
@@ -17,6 +18,9 @@ const select = (props: Props): JSX.Element => {
     }
     reader.readAsDataURL(image)
   }
+  const backScene = () => {
+    props.setScene('confirm')
+  }
   return (
     <div>
       <p className={style.background__text}>
@@ -30,6 +34,7 @@ const select = (props: Props): JSX.Element => {
         onChange={setImage}
         ref={imageInput}
       />
+      <button onClick={backScene}>名前選択に戻る</button>
     </div>
   )
 }

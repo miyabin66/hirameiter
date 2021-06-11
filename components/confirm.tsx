@@ -148,8 +148,8 @@ const confirm = (props: Props): JSX.Element => {
     canvas_text.height = 200
     const ctx_text = canvas_text.getContext('2d')
     ctx_text.beginPath()
-    ctx_text.font = `bold ${TEXT.fontSize}px NewRodinPro-B`
-    ctx_text.fillStyle = '#764724'
+    ctx_text.font = `bold ${TEXT.fontSize}px ${TEXT.font}`
+    ctx_text.fillStyle = TEXT.color
     ctx_text.fillText('その時、ふと閃いた！', 0, TEXT.posY + TEXT.fontSize)
     ctx_text.fillText(
       `このアイディアは、${props.name}との`,
@@ -183,7 +183,9 @@ const confirm = (props: Props): JSX.Element => {
     props.setComplete(canvas.current.toDataURL('image/jpeg'))
     props.setScene('complete')
   }
-
+  const backScene = () => {
+    props.setScene('background')
+  }
   return (
     <div className={style.confirm}>
       <p className={style.confirm__text}>こんな感じでいいか？</p>
@@ -192,7 +194,10 @@ const confirm = (props: Props): JSX.Element => {
         ref={canvas}
         className={style.confirm__canvas}
       ></canvas>
-      <button onClick={clickConfirm}>OK</button>
+      <div className={style.confirm__wrap}>
+        <button onClick={clickConfirm}>OK</button>
+        <button onClick={backScene}>画像選択に戻る</button>
+      </div>
     </div>
   )
 }

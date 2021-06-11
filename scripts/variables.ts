@@ -21,6 +21,8 @@ export const TEXT = {
   fontSize: 25,
   lineHeight: 15,
   posY: 50,
+  color: '#764724',
+  font: 'NewRodinPro-B',
 }
 
 export const STATE = {

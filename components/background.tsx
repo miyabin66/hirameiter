@@ -16,6 +16,7 @@ const background = (props: Props): JSX.Element => {
       case 'select':
         return (
           <BackgroundSelect
+            setScene={props.setScene}
             setBackgroundScene={setBackgroundScene}
             setSelectedImage={setSelectedImage}
           />
