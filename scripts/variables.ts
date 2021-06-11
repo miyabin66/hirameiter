@@ -22,7 +22,7 @@ export const TEXT = {
   lineHeight: 15,
   posY: 50,
   color: '#764724',
-  font: 'NewRodinPro-B',
+  font: 'RodinWanpakuPro-EB',
 }
 
 export const STATE = {
