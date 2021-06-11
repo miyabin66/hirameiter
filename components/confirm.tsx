@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react'
 import {
   WebGLRenderer,
   Scene,
@@ -179,13 +179,13 @@ const confirm = (props: Props): JSX.Element => {
     renderer.render(scene, camera)
   }
 
-  const clickConfirm = () => {
+  const clickConfirm = useCallback(() => {
     props.setComplete(canvas.current.toDataURL('image/jpeg'))
     props.setScene('complete')
-  }
-  const backScene = () => {
+  }, [])
+  const backScene = useCallback(() => {
     props.setScene('background')
-  }
+  }, [])
   return (
     <div className={style.confirm}>
       <p className={style.confirm__text}>こんな感じでいいか？</p>

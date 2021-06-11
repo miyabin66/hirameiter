@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import style from '~/styles/background.module.scss'
 import BackgroundSelect from '~/components/background/backgroundSelect'
 import BackgroundEdit from '~/components/background/backgroundEdit'
@@ -11,7 +11,7 @@ type Props = {
 const background = (props: Props): JSX.Element => {
   const [backgroundScene, setBackgroundScene] = useState('select')
   const [selectedImage, setSelectedImage] = useState('')
-  const SetImage = () => {
+  const SetImage = useCallback(() => {
     switch (backgroundScene) {
       case 'select':
         return (
@@ -33,7 +33,7 @@ const background = (props: Props): JSX.Element => {
       default:
         break
     }
-  }
+  }, [backgroundScene])
   return (
     <div className={style.name}>
       <SetImage />

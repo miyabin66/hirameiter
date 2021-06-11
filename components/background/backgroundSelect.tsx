@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from 'react'
+import { Dispatch, SetStateAction, useCallback, useRef } from 'react'
 import style from '~/styles/background.module.scss'
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 
 const select = (props: Props): JSX.Element => {
   const imageInput = useRef(null)
-  const setImage = () => {
+  const setImage = useCallback(() => {
     const image = imageInput.current.files[0]
     const reader = new FileReader()
     reader.onload = (e) => {
@@ -17,10 +17,10 @@ const select = (props: Props): JSX.Element => {
       props.setBackgroundScene('edit')
     }
     reader.readAsDataURL(image)
-  }
-  const backScene = () => {
-    props.setScene('confirm')
-  }
+  }, [])
+  const backScene = useCallback(() => {
+    props.setScene('name')
+  }, [])
   return (
     <div>
       <p className={style.background__text}>

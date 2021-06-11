@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import style from '~/styles/complete.module.scss'
 import { createTwitterIntent } from '~/scripts/twitterShare'
@@ -13,7 +13,7 @@ type upload = {
 }
 
 const complete = (props: Props): JSX.Element => {
-  const uploadImage = async () => {
+  const uploadImage = useCallback(async () => {
     const res: AxiosResponse<upload> = await axios.post('/api/upload', {
       image: props.complete,
     })
@@ -22,10 +22,10 @@ const complete = (props: Props): JSX.Element => {
       text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
       hashtags: ['ひらめいたー'].join(','),
     })
-  }
-  const backTopPage = () => {
+  }, [])
+  const backTopPage = useCallback(() => {
     props.setScene('top')
-  }
+  }, [])
   return (
     <div className={style.complete}>
       <p className={style.complete__text}>

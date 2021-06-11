@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useRef } from 'react'
+import { Dispatch, SetStateAction, useCallback, useRef } from 'react'
 import Cropper from 'react-cropper'
 import style from '~/styles/background.module.scss'
 import 'cropperjs/dist/cropper.css'
@@ -13,13 +13,13 @@ type Props = {
 const select = (props: Props): JSX.Element => {
   const cropperRef = useRef(null)
 
-  const setImage = () => {
+  const setImage = useCallback(() => {
     const imageElement = cropperRef.current
     const cropper = imageElement.cropper
     props.setBackground(cropper.getCroppedCanvas().toDataURL())
     props.setScene('confirm')
     props.setBackgroundScene('select')
-  }
+  }, [])
 
   return (
     <div>

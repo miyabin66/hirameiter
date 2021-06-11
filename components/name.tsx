@@ -19,25 +19,26 @@ const name = (props: Props): JSX.Element => {
   const nameInput = useRef(null)
   const [isEmpty, setIsEmpty] = useState(false)
   const [isLimitOver, setIsLimitOver] = useState(false)
-  const setName = (): void => {
+  const setName = useCallback((): void => {
     props.setName(nameInput.current.value)
     props.setScene('background')
-  }
-  const validation: ChangeEventHandler<HTMLInputElement> = (
-    e: ChangeEvent<HTMLInputElement>,
-  ) => {
-    if (!e.currentTarget.value) {
-      return setIsEmpty(true)
-    }
-    if (split(e.currentTarget.value).length > 10) {
-      console.log(0)
-      return setIsLimitOver(true)
-    }
-    if (isEmpty || isLimitOver) {
-      setIsEmpty(false)
-      setIsLimitOver(false)
-    }
-  }
+  }, [])
+  const validation: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (!e.currentTarget.value) {
+        return setIsEmpty(true)
+      }
+      if (split(e.currentTarget.value).length > 10) {
+        console.log(0)
+        return setIsLimitOver(true)
+      }
+      if (isEmpty || isLimitOver) {
+        setIsEmpty(false)
+        setIsLimitOver(false)
+      }
+    },
+    [isEmpty, isLimitOver],
+  )
   const Empty: () => JSX.Element = useCallback(() => {
     if (isEmpty) {
       return (
