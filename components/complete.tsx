@@ -33,8 +33,12 @@ const complete = (props: Props): JSX.Element => {
       </p>
       <img className={style.complete__image} src={props.complete} alt="" />
       <div className={style.complete__wrap}>
-        <button onClick={uploadImage}>Twitterに投稿する</button>
-        <button onClick={backTopPage}>Topページに戻る</button>
+        <button className={style.confirm__button} onClick={uploadImage}>
+          Twitterに投稿する
+        </button>
+        <button className={style.confirm__button} onClick={backTopPage}>
+          Topページに戻る
+        </button>
       </div>
     </div>
   )
