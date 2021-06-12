@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import Default from '~/layouts/default'
 import Top from '~/components/top'
 import Name from '~/components/name'
@@ -13,7 +13,7 @@ const index = (): JSX.Element => {
   const [name, setName] = useState(STATE.name)
   const [background, setBackground] = useState(STATE.background)
   const [complete, setComplete] = useState(STATE.complete)
-  const AppearScene = () => {
+  const AppearScene = useCallback(() => {
     switch (scene) {
       case 'top':
         return <Top setScene={setScene} />
@@ -35,7 +35,7 @@ const index = (): JSX.Element => {
       default:
         break
     }
-  }
+  }, [scene])
   return (
     <div className={style.index}>
       <Default />
