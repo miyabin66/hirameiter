@@ -10,6 +10,7 @@
     font-family: $font-family;
     color: $font-color;
     &__hidden {
+      font-family: $font-family;
       display: none;
     }
   }
