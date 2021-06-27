@@ -12,8 +12,10 @@ type Props = {
 const confirm = (props: Props): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>()
   useEffect(() => {
-    drawCanvas(props)
-  })
+    if (props.name && props.background) {
+      drawCanvas(props)
+    }
+  }, [props])
 
   const clickConfirm = useCallback(() => {
     props.setComplete(canvas.current.toDataURL('image/jpeg'))
