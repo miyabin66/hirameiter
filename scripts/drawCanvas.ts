@@ -26,7 +26,7 @@ type Props = {
 }
 
 const drawCanvas = async (props: Props): Promise<void> => {
-  await wait(3000)
+  // await wait(3000)
   const canvas = document.querySelector('canvas')
   canvas.width = CANVAS.width
   canvas.height = CANVAS.height
