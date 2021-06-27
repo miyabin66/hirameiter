@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react'
 import drawCanvas from '~/scripts/drawCanvas'
 import style from '~/styles/confirm.module.scss'
-import { TEXT } from '~/scripts/variables'
 
 type Props = {
   setScene: Dispatch<SetStateAction<string>>
@@ -15,6 +14,7 @@ const confirm = (props: Props): JSX.Element => {
   useEffect(() => {
     if (props.name && props.background) {
       globalThis.FONTPLUS.reload(true)
+      drawCanvas(props)
     }
   }, [props])
 
