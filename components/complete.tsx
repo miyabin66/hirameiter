@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback } from 'react'
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import style from '~/styles/complete.module.scss'
 import { createTwitterIntent } from '~/scripts/twitterShare'
@@ -13,10 +13,13 @@ type upload = {
 }
 
 const complete = (props: Props): JSX.Element => {
+  const [isUploading, setIsUploading] = useState(false)
   const uploadImage = useCallback(async () => {
+    setIsUploading(true)
     const res: AxiosResponse<upload> = await axios.post('/api/upload', {
       image: props.complete,
     })
+    setIsUploading(false)
     window.location.href = createTwitterIntent({
       url: 'https://hirameiter.vercel.app/',
       text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
@@ -28,6 +31,9 @@ const complete = (props: Props): JSX.Element => {
   }, [])
   return (
     <div className={style.complete}>
+      <div className={style.complete__uploading} data-isuploading={isUploading}>
+        <div className={style.complete__loader}></div>
+      </div>
       <p className={style.complete__text}>
         完成だ！早速隣近所にバラまいて来ようぜ！
       </p>
