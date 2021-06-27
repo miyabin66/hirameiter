@@ -14,12 +14,7 @@ const confirm = (props: Props): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>()
   useEffect(() => {
     if (props.name && props.background) {
-      const oncomplete = (res: { code: number }) => {
-        console.log(res)
-        drawCanvas(props)
-      }
-      globalThis.FONTPLUS.setFonts([TEXT.font])
-      globalThis.FONTPLUS.attachCompleteEvent(oncomplete)
+      globalThis.FONTPLUS.reload(true)
     }
   }, [props])
 
