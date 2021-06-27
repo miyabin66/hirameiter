@@ -8,18 +8,18 @@
     text-align: center;
   }
   &__select {
-    opacity: 0;
+    display: none;
     &__button {
       margin-top: 10px;
     }
     &[data-isscene='select'] {
-      opacity: 1;
+      display: block;
     }
   }
   &__edit {
-    opacity: 0;
+    display: none;
     &[data-isscene='edit'] {
-      opacity: 1;
+      display: block;
     }
   }
 }

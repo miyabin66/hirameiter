@@ -6,33 +6,33 @@
   width: 100vw;
   height: 100vh;
   &__top {
-    opacity: 0;
+    display: none;
     &[data-isscene='top'] {
-      opacity: 1;
+      display: block;
     }
   }
   &__name {
-    opacity: 0;
+    display: none;
     &[data-isscene='name'] {
-      opacity: 1;
+      display: block;
     }
   }
   &__background {
-    opacity: 0;
+    display: none;
     &[data-isscene='background'] {
-      opacity: 1;
+      display: block;
     }
   }
   &__confirm {
-    opacity: 0;
+    display: none;
     &[data-isscene='confirm'] {
-      opacity: 1;
+      display: block;
     }
   }
   &__complete {
-    opacity: 0;
+    display: none;
     &[data-isscene='complete'] {
-      opacity: 1;
+      display: block;
     }
   }
 }
