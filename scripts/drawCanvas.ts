@@ -14,7 +14,7 @@ import {
 import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
 import { LineGeometry } from 'three/examples/jsm/lines/LineGeometry.js'
-import wait from './wait'
+import wait from '~/scripts/wait'
 import readImage from '~/scripts/readImage'
 import { CANVAS, TEXTBOX, TEXT } from '~/scripts/variables'
 
@@ -26,6 +26,7 @@ type Props = {
 }
 
 const drawCanvas = async (props: Props): Promise<void> => {
+  await wait(3000)
   const canvas = document.querySelector('canvas')
   canvas.width = CANVAS.width
   canvas.height = CANVAS.height
