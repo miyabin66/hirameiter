@@ -18,6 +18,7 @@
   }
   &__error {
     color: red;
+    font-family: $font-family;
   }
   &__button {
     pointer-events: auto;
