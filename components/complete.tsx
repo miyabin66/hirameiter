@@ -25,7 +25,7 @@ const complete = (props: Props): JSX.Element => {
       text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
       hashtags: ['ひらめいたー'].join(','),
     })
-  }, [])
+  }, [props.complete])
   const backTopPage = useCallback(() => {
     props.setScene('top')
   }, [])
