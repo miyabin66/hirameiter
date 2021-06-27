@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import Default from '~/layouts/default'
 import Top from '~/components/top'
 import Name from '~/components/name'
@@ -13,35 +13,29 @@ const index = (): JSX.Element => {
   const [name, setName] = useState(STATE.name)
   const [background, setBackground] = useState(STATE.background)
   const [complete, setComplete] = useState(STATE.complete)
-  const AppearScene = useCallback(() => {
-    switch (scene) {
-      case 'top':
-        return <Top setScene={setScene} />
-      case 'name':
-        return (
-          <Name registeredName={name} setScene={setScene} setName={setName} />
-        )
-      case 'background':
-        return <Background setScene={setScene} setBackground={setBackground} />
-      case 'confirm':
-        return (
-          <Confirm
-            setScene={setScene}
-            setComplete={setComplete}
-            name={name}
-            background={background}
-          />
-        )
-      case 'complete':
-        return <Complete complete={complete} setScene={setScene} />
-      default:
-        break
-    }
-  }, [scene])
   return (
     <div className={style.index}>
       <Default />
-      <AppearScene />
+      <div className={style.index__top} data-isscene={scene}>
+        <Top setScene={setScene} />
+      </div>
+      <div className={style.index__name} data-isscene={scene}>
+        <Name setScene={setScene} setName={setName} />
+      </div>
+      <div className={style.index__background} data-isscene={scene}>
+        <Background setScene={setScene} setBackground={setBackground} />
+      </div>
+      <div className={style.index__confirm} data-isscene={scene}>
+        <Confirm
+          setScene={setScene}
+          setComplete={setComplete}
+          name={name}
+          background={background}
+        />
+      </div>
+      <div className={style.index__complete} data-isscene={scene}>
+        <Complete complete={complete} setScene={setScene} />
+      </div>
     </div>
   )
 }

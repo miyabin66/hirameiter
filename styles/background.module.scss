@@ -5,5 +5,21 @@
   &__text {
     font-family: $font-family;
     color: $font-color;
+    text-align: center;
+  }
+  &__select {
+    display: none;
+    &__button {
+      margin-top: 10px;
+    }
+    &[data-isscene='select'] {
+      display: block;
+    }
+  }
+  &__edit {
+    display: none;
+    &[data-isscene='edit'] {
+      display: block;
+    }
   }
 }

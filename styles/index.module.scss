@@ -5,4 +5,34 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
+  &__top {
+    display: none;
+    &[data-isscene='top'] {
+      display: block;
+    }
+  }
+  &__name {
+    display: none;
+    &[data-isscene='name'] {
+      display: block;
+    }
+  }
+  &__background {
+    display: none;
+    &[data-isscene='background'] {
+      display: block;
+    }
+  }
+  &__confirm {
+    display: none;
+    &[data-isscene='confirm'] {
+      display: block;
+    }
+  }
+  &__complete {
+    display: none;
+    &[data-isscene='complete'] {
+      display: block;
+    }
+  }
 }

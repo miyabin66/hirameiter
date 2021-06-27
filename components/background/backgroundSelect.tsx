@@ -15,6 +15,7 @@ const select = (props: Props): JSX.Element => {
     reader.onload = (e) => {
       props.setSelectedImage(e.target.result)
       props.setBackgroundScene('edit')
+      imageInput.current.value = ''
     }
     reader.readAsDataURL(image)
   }, [])
@@ -26,7 +27,9 @@ const select = (props: Props): JSX.Element => {
       <p className={style.background__text}>
         トレーニング風景を選んでくれ！
         <br />
-        無かったらお前の好きなUMAの写真でもいいぞ
+        無かったらお前の好きな
+        <br />
+        UMAの写真でもいいぞ
       </p>
       <input
         type="file"
@@ -34,7 +37,9 @@ const select = (props: Props): JSX.Element => {
         onChange={setImage}
         ref={imageInput}
       />
-      <button onClick={backScene}>名前入力に戻る</button>
+      <button className={style.background__select__button} onClick={backScene}>
+        名前入力に戻る
+      </button>
     </div>
   )
 }

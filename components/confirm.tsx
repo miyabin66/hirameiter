@@ -31,11 +31,11 @@ const confirm = (props: Props): JSX.Element => {
         className={style.confirm__canvas}
       ></canvas>
       <div className={style.confirm__wrap}>
-        <button className={style.confirm__button} onClick={clickConfirm}>
-          OK
-        </button>
         <button className={style.confirm__button} onClick={backScene}>
           画像選択に戻る
+        </button>
+        <button className={style.confirm__button} onClick={clickConfirm}>
+          OK
         </button>
       </div>
     </div>

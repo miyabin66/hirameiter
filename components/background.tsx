@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
 import style from '~/styles/background.module.scss'
 import BackgroundSelect from '~/components/background/backgroundSelect'
 import BackgroundEdit from '~/components/background/backgroundEdit'
@@ -11,32 +11,23 @@ type Props = {
 const background = (props: Props): JSX.Element => {
   const [backgroundScene, setBackgroundScene] = useState('select')
   const [selectedImage, setSelectedImage] = useState('')
-  const SetImage = useCallback(() => {
-    switch (backgroundScene) {
-      case 'select':
-        return (
-          <BackgroundSelect
-            setScene={props.setScene}
-            setBackgroundScene={setBackgroundScene}
-            setSelectedImage={setSelectedImage}
-          />
-        )
-      case 'edit':
-        return (
-          <BackgroundEdit
-            setScene={props.setScene}
-            setBackgroundScene={setBackgroundScene}
-            selectedImage={selectedImage}
-            setBackground={props.setBackground}
-          />
-        )
-      default:
-        break
-    }
-  }, [backgroundScene])
   return (
-    <div className={style.name}>
-      <SetImage />
+    <div className={style.background}>
+      <div className={style.background__select} data-isscene={backgroundScene}>
+        <BackgroundSelect
+          setScene={props.setScene}
+          setBackgroundScene={setBackgroundScene}
+          setSelectedImage={setSelectedImage}
+        />
+      </div>
+      <div className={style.background__edit} data-isscene={backgroundScene}>
+        <BackgroundEdit
+          setScene={props.setScene}
+          setBackgroundScene={setBackgroundScene}
+          selectedImage={selectedImage}
+          setBackground={props.setBackground}
+        />
+      </div>
     </div>
   )
 }
