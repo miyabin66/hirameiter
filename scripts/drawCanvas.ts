@@ -154,7 +154,7 @@ const drawCanvas = async (props: Props): Promise<void> => {
     0,
     TEXT.posY + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
   )
-  FONTPLUS.reload(true)
+  globalThis.FONTPLUS.reload(true)
   const texture_text = await readImage(canvas_text.toDataURL('image/png'))
   const geometry_text = new PlaneGeometry(canvas_text.width, canvas_text.height)
   const material_text = new MeshStandardMaterial({
