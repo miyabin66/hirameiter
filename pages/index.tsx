@@ -18,7 +18,9 @@ const index = (): JSX.Element => {
       case 'top':
         return <Top setScene={setScene} />
       case 'name':
-        return <Name setScene={setScene} setName={setName} />
+        return (
+          <Name registeredName={name} setScene={setScene} setName={setName} />
+        )
       case 'background':
         return <Background setScene={setScene} setBackground={setBackground} />
       case 'confirm':

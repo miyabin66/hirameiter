@@ -34,7 +34,7 @@ const select = (props: Props): JSX.Element => {
         onChange={setImage}
         ref={imageInput}
       />
-      <button onClick={backScene}>名前選択に戻る</button>
+      <button onClick={backScene}>名前入力に戻る</button>
     </div>
   )
 }

@@ -4,6 +4,7 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -11,6 +12,7 @@ import split from 'graphemesplit'
 import style from '~/styles/name.module.scss'
 
 type Props = {
+  registeredName: string
   setName: Dispatch<SetStateAction<string>>
   setScene: Dispatch<SetStateAction<string>>
 }
@@ -19,25 +21,36 @@ const name = (props: Props): JSX.Element => {
   const nameInput = useRef(null)
   const [isEmpty, setIsEmpty] = useState(false)
   const [isLimitOver, setIsLimitOver] = useState(false)
+  const [isFirstEmpty, setIsFirstEmpty] = useState(true)
+  useEffect(() => {
+    if (props.registeredName) {
+      nameInput.current.value = props.registeredName
+      setIsFirstEmpty(false)
+    }
+  })
   const setName = useCallback((): void => {
     props.setName(nameInput.current.value)
     props.setScene('background')
   }, [])
   const validation: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
+      if (isFirstEmpty) {
+        return setIsFirstEmpty(false)
+      }
       if (!e.currentTarget.value) {
         return setIsEmpty(true)
       }
       if (split(e.currentTarget.value).length > 10) {
-        console.log(0)
         return setIsLimitOver(true)
       }
-      if (isEmpty || isLimitOver) {
-        setIsEmpty(false)
-        setIsLimitOver(false)
+      if (isEmpty) {
+        return setIsEmpty(false)
+      }
+      if (isLimitOver) {
+        return setIsLimitOver(false)
       }
     },
-    [isEmpty, isLimitOver],
+    [isEmpty, isLimitOver, isFirstEmpty],
   )
   const Empty: () => JSX.Element = useCallback(() => {
     if (isEmpty) {
@@ -80,6 +93,7 @@ const name = (props: Props): JSX.Element => {
           onClick={setName}
           data-isempty={isEmpty}
           data-islimitover={isLimitOver}
+          data-isfirstempty={isFirstEmpty}
         >
           次へ
         </button>

@@ -20,6 +20,8 @@
     color: red;
   }
   &__button {
+    pointer-events: auto;
+    opacity: 1;
     &[data-isempty='true'] {
       pointer-events: none;
       opacity: 0.5;
@@ -27,6 +29,10 @@
     &[data-islimitover='true'] {
       pointer-events: none;
       opacity: 0;
+    }
+    &[data-isfirstempty='true'] {
+      pointer-events: none;
+      opacity: 0.5;
     }
   }
 }
