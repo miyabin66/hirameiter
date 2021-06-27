@@ -9,6 +9,9 @@
   &__text {
     font-family: $font-family;
     color: $font-color;
+    &__hidden {
+      display: none;
+    }
   }
   &__wrap {
     display: flex;

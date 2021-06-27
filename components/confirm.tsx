@@ -13,6 +13,7 @@ const confirm = (props: Props): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>()
   useEffect(() => {
     if (props.name && props.background) {
+      globalThis.FONTPLUS.reload(true)
       drawCanvas(props)
     }
   }, [props])
@@ -40,6 +41,10 @@ const confirm = (props: Props): JSX.Element => {
           OK
         </button>
       </div>
+      <p className={style.confirm__text__hidden}>
+        その時、ふと閃いた！このアイディアは、{props.name}
+        とのトレーニングに活かせるかもしれない！
+      </p>
     </div>
   )
 }
