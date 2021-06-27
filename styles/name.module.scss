@@ -17,8 +17,22 @@
     font-size: 20px;
   }
   &__error {
-    color: red;
-    font-family: $font-family;
+    &__empty {
+      color: red;
+      font-family: $font-family;
+      display: none;
+      &[data-isempty='true'] {
+        display: block;
+      }
+    }
+    &__over {
+      color: red;
+      font-family: $font-family;
+      display: none;
+      &[data-isover='true'] {
+        display: block;
+      }
+    }
   }
   &__button {
     pointer-events: auto;

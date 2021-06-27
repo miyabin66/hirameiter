@@ -18,7 +18,7 @@ type Props = {
 const name = (props: Props): JSX.Element => {
   const nameInput = useRef(null)
   const [isEmpty, setIsEmpty] = useState(false)
-  const [isLimitOver, setIsLimitOver] = useState(false)
+  const [isOver, setIsOver] = useState(false)
   const [isFirstEmpty, setIsFirstEmpty] = useState(true)
   const setName = useCallback((): void => {
     props.setName(nameInput.current.value)
@@ -33,41 +33,17 @@ const name = (props: Props): JSX.Element => {
         return setIsEmpty(true)
       }
       if (split(e.currentTarget.value).length > 10) {
-        return setIsLimitOver(true)
+        return setIsOver(true)
       }
       if (isEmpty) {
         return setIsEmpty(false)
       }
-      if (isLimitOver) {
-        return setIsLimitOver(false)
+      if (isOver) {
+        return setIsOver(false)
       }
     },
-    [isEmpty, isLimitOver, isFirstEmpty],
+    [isEmpty, isOver, isFirstEmpty],
   )
-  const Empty: () => JSX.Element = useCallback(() => {
-    if (isEmpty) {
-      return (
-        <p className={style.name__error}>
-          何も入力してねーじゃねえか！
-          <br />
-          ボタン押させねーぞ！
-        </p>
-      )
-    }
-    return <></>
-  }, [isEmpty])
-  const LimitOver: () => JSX.Element = useCallback(() => {
-    if (isLimitOver) {
-      return (
-        <p className={style.name__error}>
-          おいおい10文字以内にしろよ！
-          <br />
-          そうしねーとボタン隠したままにするぞ！
-        </p>
-      )
-    }
-    return <></>
-  }, [isLimitOver])
   return (
     <div className={style.name}>
       <p className={style.name__text}>
@@ -84,14 +60,22 @@ const name = (props: Props): JSX.Element => {
           className={style.name__button}
           onClick={setName}
           data-isempty={isEmpty}
-          data-islimitover={isLimitOver}
+          data-islimitover={isOver}
           data-isfirstempty={isFirstEmpty}
         >
           次へ
         </button>
       </div>
-      <Empty />
-      <LimitOver />
+      <p className={style.name__error__empty} data-isempty={isEmpty}>
+        何も入力してねーじゃねえか！
+        <br />
+        ボタン押させねーぞ！
+      </p>
+      <p className={style.name__error__over} data-isover={isOver}>
+        おいおい10文字以内にしろよ！
+        <br />
+        そうしねーとボタン隠したままにするぞ！
+      </p>
     </div>
   )
 }
