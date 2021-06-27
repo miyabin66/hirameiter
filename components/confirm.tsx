@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import drawCanvas from '~/scripts/drawCanvas'
 import style from '~/styles/confirm.module.scss'
 
@@ -11,10 +18,11 @@ type Props = {
 
 const confirm = (props: Props): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>()
+  const [isMaking, setIsMaking] = useState(false)
   useEffect(() => {
     if (props.name && props.background) {
       globalThis.FONTPLUS.reload(true)
-      drawCanvas(props)
+      drawCanvas(props, setIsMaking)
     }
   }, [props])
 
@@ -27,6 +35,9 @@ const confirm = (props: Props): JSX.Element => {
   }, [])
   return (
     <div className={style.confirm}>
+      <div className={style.confirm__making} data-ismaking={isMaking}>
+        <div className={style.confirm__loader}></div>
+      </div>
       <p className={style.confirm__text}>こんな感じでいいか？</p>
       <canvas
         id="canvas"

@@ -2,6 +2,32 @@
 
 .confirm {
   width: $content-width;
+  &__making {
+    display: none;
+    &[data-ismaking='true'] {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: #3aaaf8;
+    }
+  }
+  &__loader {
+    color: #ffffff;
+    font-size: 20px;
+    margin: 100px auto;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: relative;
+    text-indent: -9999em;
+    animation: loader 1.3s infinite linear;
+    transform: translateZ(0);
+  }
   &__canvas {
     width: 100%;
     height: calc(1147px / 2);
