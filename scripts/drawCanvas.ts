@@ -171,13 +171,14 @@ const drawCanvas = async (props: Props): Promise<void> => {
       const mesh_text = new Mesh(geometry_text, material_text)
       mesh_text.position.set(0, -400, 3)
       scene.add(mesh_text)
-
-      renderer.render(scene, camera)
+      console.log('Text add')
     }
   }
 
   globalThis.FONTPLUS.setFonts([TEXT.font])
   globalThis.FONTPLUS.attachCompleteEvent(oncomplete)
+
+  renderer.render(scene, camera)
 }
 
 export default drawCanvas
