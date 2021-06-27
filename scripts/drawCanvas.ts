@@ -154,24 +154,19 @@ const drawCanvas = async (props: Props): Promise<void> => {
     0,
     TEXT.posY + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
   )
-  window.onload = async () => {
-    const texture_text = await readImage(canvas_text.toDataURL('image/png'))
-    const geometry_text = new PlaneGeometry(
-      canvas_text.width,
-      canvas_text.height,
-    )
-    const material_text = new MeshStandardMaterial({
-      color: 0xffffff,
-      map: texture_text,
-      transparent: true,
-      depthTest: false,
-    })
-    const mesh_text = new Mesh(geometry_text, material_text)
-    mesh_text.position.set(0, -400, 3)
-    scene.add(mesh_text)
-    console.log('Text add')
-    renderer.render(scene, camera)
-  }
+  const texture_text = await readImage(canvas_text.toDataURL('image/png'))
+  const geometry_text = new PlaneGeometry(canvas_text.width, canvas_text.height)
+  const material_text = new MeshStandardMaterial({
+    color: 0xffffff,
+    map: texture_text,
+    transparent: true,
+    depthTest: false,
+  })
+  const mesh_text = new Mesh(geometry_text, material_text)
+  mesh_text.position.set(0, -400, 3)
+  scene.add(mesh_text)
+
+  renderer.render(scene, camera)
 }
 
 export default drawCanvas

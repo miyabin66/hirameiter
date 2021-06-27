@@ -13,6 +13,7 @@ const confirm = (props: Props): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>()
   useEffect(() => {
     if (props.name && props.background) {
+      globalThis.FONTPLUS.reload(true)
       drawCanvas(props)
     }
   }, [props])
