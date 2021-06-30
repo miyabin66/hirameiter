@@ -11,6 +11,7 @@ import style from '~/styles/index.module.scss'
 const index = (): JSX.Element => {
   const [scene, setScene] = useState(STATE.scene)
   const [name, setName] = useState(STATE.name)
+  const [isTopScene, setIsTopScene] = useState(true)
   const [background, setBackground] = useState(STATE.background)
   const [complete, setComplete] = useState(STATE.complete)
   return (
@@ -20,7 +21,12 @@ const index = (): JSX.Element => {
         <Top setScene={setScene} />
       </div>
       <div className={style.index__name} data-isscene={scene}>
-        <Name setScene={setScene} setName={setName} />
+        <Name
+          isTopScene={isTopScene}
+          setScene={setScene}
+          setName={setName}
+          setIsTopScene={setIsTopScene}
+        />
       </div>
       <div className={style.index__background} data-isscene={scene}>
         <Background setScene={setScene} setBackground={setBackground} />
@@ -34,7 +40,11 @@ const index = (): JSX.Element => {
         />
       </div>
       <div className={style.index__complete} data-isscene={scene}>
-        <Complete complete={complete} setScene={setScene} />
+        <Complete
+          complete={complete}
+          setIsTopScene={setIsTopScene}
+          setScene={setScene}
+        />
       </div>
     </div>
   )

@@ -5,6 +5,7 @@ import { createTwitterIntent } from '~/scripts/twitterShare'
 
 type Props = {
   complete: string
+  setIsTopScene: Dispatch<SetStateAction<boolean>>
   setScene: Dispatch<SetStateAction<string>>
 }
 
@@ -28,6 +29,7 @@ const complete = (props: Props): JSX.Element => {
   }, [props.complete])
   const backTopPage = useCallback(() => {
     props.setScene('top')
+    props.setIsTopScene(true)
   }, [])
   return (
     <div className={style.complete}>

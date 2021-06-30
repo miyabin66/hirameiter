@@ -19,9 +19,13 @@ type Props = {
 const confirm = (props: Props): JSX.Element => {
   const canvas = useRef<HTMLCanvasElement>()
   const [isMaking, setIsMaking] = useState(false)
+  const [name, setIsName] = useState('')
   useEffect(() => {
     if (props.name && props.background) {
-      globalThis.FONTPLUS.reload(true)
+      if (props.name !== name) {
+        globalThis.FONTPLUS.reload(true)
+        setIsName(props.name)
+      }
       drawCanvas(props, setIsMaking)
     }
   }, [props])

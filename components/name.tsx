@@ -4,6 +4,7 @@ import {
   Dispatch,
   SetStateAction,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react'
@@ -11,7 +12,9 @@ import split from 'graphemesplit'
 import style from '~/styles/name.module.scss'
 
 type Props = {
+  isTopScene: boolean
   setName: Dispatch<SetStateAction<string>>
+  setIsTopScene: Dispatch<SetStateAction<boolean>>
   setScene: Dispatch<SetStateAction<string>>
 }
 
@@ -20,6 +23,12 @@ const name = (props: Props): JSX.Element => {
   const [isEmpty, setIsEmpty] = useState(false)
   const [isOver, setIsOver] = useState(false)
   const [isFirstEmpty, setIsFirstEmpty] = useState(true)
+  useEffect(() => {
+    if (props.isTopScene) {
+      nameInput.current.value = ''
+      props.setIsTopScene(false)
+    }
+  })
   const setName = useCallback((): void => {
     props.setName(nameInput.current.value)
     props.setScene('background')
