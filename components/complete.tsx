@@ -23,7 +23,7 @@ const complete = (props: Props): JSX.Element => {
     })
     const shareURL = createTwitterIntent({
       url: 'https://hirameiter.vercel.app/',
-      text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
+      text: `明日のトレーニングはこれで決まりだな！ ${res.data.url}`,
       hashtags: ['ひらめいたー'].join(','),
     })
     setIsUploading(false)
