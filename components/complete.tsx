@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 import axios, { AxiosResponse } from 'axios'
 import style from '~/styles/complete.module.scss'
 import { createTwitterIntent } from '~/scripts/twitterShare'
+import getUA from '~/scripts/getUA'
 
 type Props = {
   complete: string
@@ -20,12 +21,17 @@ const complete = (props: Props): JSX.Element => {
     const res: AxiosResponse<upload> = await axios.post('/api/upload', {
       image: props.complete,
     })
-    setIsUploading(false)
-    window.location.href = createTwitterIntent({
+    const shareURL = createTwitterIntent({
       url: 'https://hirameiter.vercel.app/',
       text: `トレーナー！お前いつも暇なんだな ${res.data.url}`,
       hashtags: ['ひらめいたー'].join(','),
     })
+    setIsUploading(false)
+    if (getUA().isPC) {
+      window.open(shareURL, '_blank', 'noreferrer')
+    } else {
+      window.location.href = shareURL
+    }
   }, [props.complete])
   const backTopPage = useCallback(() => {
     props.setScene('top')
