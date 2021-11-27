@@ -6,8 +6,8 @@ import style from '~/styles/confirm.module.scss'
 
 const confirm = (): JSX.Element => {
   const { name, background, setScene, setComplete } = useIndexContext()
-  const canvas = useRef<HTMLCanvasElement>()
-  const [isMaking, setIsMaking] = useState(false)
+  const canvas = useRef<HTMLCanvasElement>(null)
+  const [isMaking, setIsMaking] = useState<boolean>(false)
   const [beforeName, setBeforeName] = useState<string>('')
 
   useEffect(() => {

@@ -1,52 +1,16 @@
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
-import split from 'graphemesplit'
+import useName from '~/hooks/useName'
 import style from '~/styles/name.module.scss'
-import { useIndexContext } from '~/context/IndexContext'
-import { Scene } from '~/interfaces/enums'
 
 const name = (): JSX.Element => {
-  const { isTopScene, setScene, setName, setIsTopScene } = useIndexContext()
-  const nameInput = useRef(null)
-  const [isEmpty, setIsEmpty] = useState(false)
-  const [isOver, setIsOver] = useState(false)
-  const [isFirstEmpty, setIsFirstEmpty] = useState(true)
-  useEffect(() => {
-    if (isTopScene) {
-      nameInput.current.value = ''
-      setIsTopScene(false)
-    }
-  })
-  const saveName = useCallback((): void => {
-    setName(nameInput.current.value)
-    setScene(Scene.background)
-  }, [])
-  const validation: ChangeEventHandler<HTMLInputElement> = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      if (isFirstEmpty) {
-        return setIsFirstEmpty(false)
-      }
-      if (!e.currentTarget.value) {
-        return setIsEmpty(true)
-      }
-      if (split(e.currentTarget.value).length > 10) {
-        return setIsOver(true)
-      }
-      if (isEmpty) {
-        return setIsEmpty(false)
-      }
-      if (isOver) {
-        return setIsOver(false)
-      }
-    },
-    [isEmpty, isOver, isFirstEmpty],
-  )
+  const {
+    isEmpty,
+    isOver,
+    isFirstEmpty,
+    nameInput,
+    validation,
+    saveName,
+  } = useName()
+
   return (
     <div className={style.name}>
       <p className={style.name__text}>
