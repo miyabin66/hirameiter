@@ -26,19 +26,19 @@ const name = (): JSX.Element => {
         <button
           className={style.name__button}
           onClick={saveName}
-          data-isempty={isEmpty}
-          data-islimitover={isOver}
-          data-isfirstempty={isFirstEmpty}
+          data-is-empty={isEmpty}
+          data-is-over={isOver}
+          data-is-first-empty={isFirstEmpty}
         >
           次へ
         </button>
       </div>
-      <p className={style.name__error__empty} data-isempty={isEmpty}>
+      <p className={style.name__error__empty} data-is-empty={isEmpty}>
         何も入力してねーじゃねえか！
         <br />
         ボタン押させねーぞ！
       </p>
-      <p className={style.name__error__over} data-isover={isOver}>
+      <p className={style.name__error__over} data-is-over={isOver}>
         おいおい10文字以内にしろよ！
         <br />
         そうしねーとボタン隠したままにするぞ！

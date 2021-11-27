@@ -9,7 +9,10 @@ const complete = (): JSX.Element => {
 
   return (
     <div className={style.complete}>
-      <div className={style.complete__uploading} data-isuploading={isUploading}>
+      <div
+        className={style.complete__uploading}
+        data-is-uploading={isUploading}
+      >
         <div className={style.complete__loader}></div>
       </div>
       <p className={style.complete__text}>

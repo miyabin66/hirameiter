@@ -8,7 +8,7 @@ const confirm = (): JSX.Element => {
 
   return (
     <div className={style.confirm}>
-      <div className={style.confirm__making} data-ismaking={isMaking}>
+      <div className={style.confirm__making} data-is-making={isMaking}>
         <div className={style.confirm__loader}></div>
       </div>
       <p className={style.confirm__text}>こんな感じでいいか？</p>

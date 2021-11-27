@@ -7,31 +7,31 @@
   height: 100vh;
   &__top {
     display: none;
-    &[data-isscene='top'] {
+    &[data-is-scene='top'] {
       display: block;
     }
   }
   &__name {
     display: none;
-    &[data-isscene='name'] {
+    &[data-is-scene='name'] {
       display: block;
     }
   }
   &__background {
     display: none;
-    &[data-isscene='background'] {
+    &[data-is-scene='background'] {
       display: block;
     }
   }
   &__confirm {
     display: none;
-    &[data-isscene='confirm'] {
+    &[data-is-scene='confirm'] {
       display: block;
     }
   }
   &__complete {
     display: none;
-    &[data-isscene='complete'] {
+    &[data-is-scene='complete'] {
       display: block;
     }
   }

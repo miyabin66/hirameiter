@@ -6,7 +6,7 @@
   position: relative;
   &__uploading {
     display: none;
-    &[data-isuploading='true'] {
+    &[data-is-uploading='true'] {
       display: flex;
       justify-content: center;
       align-items: center;

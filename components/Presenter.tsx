@@ -13,19 +13,19 @@ const Presenter = (): JSX.Element => {
   return (
     <div className={style.index}>
       <Default />
-      <div className={style.index__top} data-isscene={scene}>
+      <div className={style.index__top} data-is-scene={scene}>
         <Top />
       </div>
-      <div className={style.index__name} data-isscene={scene}>
+      <div className={style.index__name} data-is-scene={scene}>
         <Name />
       </div>
-      <div className={style.index__background} data-isscene={scene}>
+      <div className={style.index__background} data-is-scene={scene}>
         <Background />
       </div>
-      <div className={style.index__confirm} data-isscene={scene}>
+      <div className={style.index__confirm} data-is-scene={scene}>
         <Confirm />
       </div>
-      <div className={style.index__complete} data-isscene={scene}>
+      <div className={style.index__complete} data-is-scene={scene}>
         <Complete />
       </div>
     </div>

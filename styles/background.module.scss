@@ -12,13 +12,13 @@
     &__button {
       margin-top: 10px;
     }
-    &[data-isscene='select'] {
+    &[data-is-scene='select'] {
       display: block;
     }
   }
   &__edit {
     display: none;
-    &[data-isscene='edit'] {
+    &[data-is-scene='edit'] {
       display: block;
     }
   }

@@ -6,7 +6,7 @@
   position: relative;
   &__making {
     display: none;
-    &[data-ismaking='true'] {
+    &[data-is-making='true'] {
       display: flex;
       justify-content: center;
       align-items: center;
