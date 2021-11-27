@@ -21,6 +21,9 @@ const upload = async (
     status: `${new Date()}`,
     media_ids: media.media_id_string,
   })
+  await client.post('statuses/destroy', {
+    id: post.id_str,
+  })
   return res.send({ url: post.entities.media[0].url })
 }
 
