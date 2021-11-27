@@ -1,8 +1,6 @@
 import {
   ChangeEvent,
   ChangeEventHandler,
-  Dispatch,
-  SetStateAction,
   useCallback,
   useEffect,
   useRef,
@@ -10,28 +8,24 @@ import {
 } from 'react'
 import split from 'graphemesplit'
 import style from '~/styles/name.module.scss'
+import { useIndexContext } from '~/context/IndexContext'
+import { Scene } from '~/interfaces/enums'
 
-type Props = {
-  isTopScene: boolean
-  setName: Dispatch<SetStateAction<string>>
-  setIsTopScene: Dispatch<SetStateAction<boolean>>
-  setScene: Dispatch<SetStateAction<string>>
-}
-
-const name = (props: Props): JSX.Element => {
+const name = (): JSX.Element => {
+  const { isTopScene, setScene, setName, setIsTopScene } = useIndexContext()
   const nameInput = useRef(null)
   const [isEmpty, setIsEmpty] = useState(false)
   const [isOver, setIsOver] = useState(false)
   const [isFirstEmpty, setIsFirstEmpty] = useState(true)
   useEffect(() => {
-    if (props.isTopScene) {
+    if (isTopScene) {
       nameInput.current.value = ''
-      props.setIsTopScene(false)
+      setIsTopScene(false)
     }
   })
-  const setName = useCallback((): void => {
-    props.setName(nameInput.current.value)
-    props.setScene('background')
+  const saveName = useCallback((): void => {
+    setName(nameInput.current.value)
+    setScene(Scene.background)
   }, [])
   const validation: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -67,7 +61,7 @@ const name = (props: Props): JSX.Element => {
         ></input>
         <button
           className={style.name__button}
-          onClick={setName}
+          onClick={saveName}
           data-isempty={isEmpty}
           data-islimitover={isOver}
           data-isfirstempty={isFirstEmpty}

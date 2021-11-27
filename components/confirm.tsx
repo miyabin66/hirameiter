@@ -1,41 +1,34 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { useIndexContext } from '~/context/IndexContext'
+import { Scene } from '~/interfaces/enums'
 import drawCanvas from '~/scripts/drawCanvas'
 import style from '~/styles/confirm.module.scss'
 
-type Props = {
-  setScene: Dispatch<SetStateAction<string>>
-  setComplete: Dispatch<SetStateAction<string>>
-  name: string
-  background: string
-}
-
-const confirm = (props: Props): JSX.Element => {
+const confirm = (): JSX.Element => {
+  const { name, background, setScene, setComplete } = useIndexContext()
   const canvas = useRef<HTMLCanvasElement>()
   const [isMaking, setIsMaking] = useState(false)
-  const [name, setIsName] = useState('')
+  const [beforeName, setBeforeName] = useState<string>('')
+
   useEffect(() => {
-    if (props.name && props.background) {
-      if (props.name !== name) {
+    if (name && background && !isMaking) {
+      if (name !== beforeName) {
         globalThis.FONTPLUS.reload(true)
-        setIsName(props.name)
+        setBeforeName(name)
+        setIsMaking(true)
+        drawCanvas({ name, image: background }).then(() => {
+          setIsMaking(false)
+        })
       }
-      drawCanvas(props, setIsMaking)
     }
-  }, [props])
+  }, [name, background])
 
   const clickConfirm = useCallback(() => {
-    props.setComplete(canvas.current.toDataURL('image/jpeg'))
-    props.setScene('complete')
+    setComplete(canvas.current.toDataURL('image/jpeg'))
+    setScene(Scene.complete)
   }, [])
   const backScene = useCallback(() => {
-    props.setScene('background')
+    setScene(Scene.background)
   }, [])
   return (
     <div className={style.confirm}>
@@ -57,7 +50,7 @@ const confirm = (props: Props): JSX.Element => {
         </button>
       </div>
       <p className={style.confirm__text__hidden}>
-        その時、ふと閃いた！このアイディアは、{props.name}
+        その時、ふと閃いた！このアイディアは、{name}
         とのトレーニングに活かせるかもしれない！
       </p>
     </div>

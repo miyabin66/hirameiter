@@ -1,31 +1,28 @@
-import { Dispatch, SetStateAction, useState } from 'react'
+import { useState } from 'react'
 import style from '~/styles/background.module.scss'
 import BackgroundSelect from '~/components/background/backgroundSelect'
 import BackgroundEdit from '~/components/background/backgroundEdit'
+import { useIndexContext } from '~/context/IndexContext'
 
-type Props = {
-  setScene: Dispatch<SetStateAction<string>>
-  setBackground: Dispatch<SetStateAction<string>>
-}
-
-const background = (props: Props): JSX.Element => {
+const background = (): JSX.Element => {
+  const { setScene, setBackground } = useIndexContext()
   const [backgroundScene, setBackgroundScene] = useState('select')
   const [selectedImage, setSelectedImage] = useState('')
   return (
     <div className={style.background}>
       <div className={style.background__select} data-isscene={backgroundScene}>
         <BackgroundSelect
-          setScene={props.setScene}
+          setScene={setScene}
           setBackgroundScene={setBackgroundScene}
           setSelectedImage={setSelectedImage}
         />
       </div>
       <div className={style.background__edit} data-isscene={backgroundScene}>
         <BackgroundEdit
-          setScene={props.setScene}
+          setScene={setScene}
           setBackgroundScene={setBackgroundScene}
           selectedImage={selectedImage}
-          setBackground={props.setBackground}
+          setBackground={setBackground}
         />
       </div>
     </div>

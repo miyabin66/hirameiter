@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from 'react'
 import {
   WebGLRenderer,
   Scene,
@@ -18,18 +17,13 @@ import wait from '~/scripts/wait'
 import readImage from '~/scripts/readImage'
 import { CANVAS, TEXTBOX, TEXT } from '~/scripts/variables'
 
-type Props = {
-  setScene: Dispatch<SetStateAction<string>>
-  setComplete: Dispatch<SetStateAction<string>>
+const drawCanvas = async ({
+  name,
+  image,
+}: {
   name: string
-  background: string
-}
-
-const drawCanvas = async (
-  props: Props,
-  setIsMaking: Dispatch<SetStateAction<boolean>>,
-): Promise<void> => {
-  setIsMaking(true)
+  image: string
+}): Promise<void> => {
   await wait(3000)
   const canvas = document.querySelector('canvas')
   canvas.width = CANVAS.width
@@ -51,7 +45,7 @@ const drawCanvas = async (
   scene.add(ambientLight)
 
   // トレーニング画像
-  const texture_training = await readImage(props.background)
+  const texture_training = await readImage(image)
   const geometry_training = new PlaneGeometry(CANVAS.width, CANVAS.height)
   const material_training = new MeshStandardMaterial({
     map: texture_training,
@@ -151,7 +145,7 @@ const drawCanvas = async (
   ctx_text.fillStyle = TEXT.color
   ctx_text.fillText('その時、ふと閃いた！', 0, TEXT.posY + TEXT.fontSize)
   ctx_text.fillText(
-    `このアイディアは、${props.name}との`,
+    `このアイディアは、${name}との`,
     0,
     TEXT.posY + TEXT.fontSize * 2 + TEXT.lineHeight,
   )
@@ -174,7 +168,8 @@ const drawCanvas = async (
   scene.add(mesh_text)
 
   renderer.render(scene, camera)
-  setIsMaking(false)
+
+  return Promise.resolve()
 }
 
 export default drawCanvas
