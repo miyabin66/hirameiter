@@ -16,9 +16,11 @@ const confirm = (): JSX.Element => {
         globalThis.FONTPLUS.reload(true)
         setBeforeName(name)
         setIsMaking(true)
-        drawCanvas({ name, image: background }).then(() => {
-          setIsMaking(false)
-        })
+        drawCanvas({ canvas: canvas.current, name, image: background }).then(
+          () => {
+            setIsMaking(false)
+          },
+        )
       }
     }
   }, [name, background])
@@ -36,11 +38,7 @@ const confirm = (): JSX.Element => {
         <div className={style.confirm__loader}></div>
       </div>
       <p className={style.confirm__text}>こんな感じでいいか？</p>
-      <canvas
-        id="canvas"
-        ref={canvas}
-        className={style.confirm__canvas}
-      ></canvas>
+      <canvas ref={canvas} className={style.confirm__canvas}></canvas>
       <div className={style.confirm__wrap}>
         <button className={style.confirm__button} onClick={backScene}>
           画像選択に戻る

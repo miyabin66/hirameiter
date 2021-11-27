@@ -18,14 +18,15 @@ import readImage from '~/scripts/readImage'
 import { CANVAS, TEXTBOX, TEXT } from '~/scripts/variables'
 
 const drawCanvas = async ({
+  canvas,
   name,
   image,
 }: {
+  canvas: HTMLCanvasElement
   name: string
   image: string
 }): Promise<void> => {
   await wait(3000)
-  const canvas = document.querySelector('canvas')
   canvas.width = CANVAS.width
   canvas.height = CANVAS.height
 
