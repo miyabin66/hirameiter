@@ -5,7 +5,7 @@ import { createTwitterIntent } from '~/scripts/twitterShare'
 import { useIndexContext } from '~/context/IndexContext'
 import { Scene } from '~/interfaces/enums'
 
-interface Return {
+interface TypeReturn {
   isUploading: boolean
   uploadImage: () => void
   backTopPage: () => void
@@ -15,7 +15,7 @@ interface Return {
 //   url: string
 // }
 
-const useComplete = (): Return => {
+const useComplete = (): TypeReturn => {
   const { setScene, setName, setIsTopScene, setBackground } = useIndexContext()
   const [isUploading, setIsUploading] = useState(false)
   const { hasTouchScreen } = useHasTouchScreen()

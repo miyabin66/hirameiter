@@ -6,7 +6,7 @@ import {
   useContext,
   useState,
 } from 'react'
-import { Scene } from '~/interfaces/enums'
+import { BackgroundScene, Scene } from '~/interfaces/enums'
 
 interface TypeContext {
   scene: Scene
@@ -19,6 +19,10 @@ interface TypeContext {
   setBackground: Dispatch<SetStateAction<string>>
   complete: string
   setComplete: Dispatch<SetStateAction<string>>
+  backgroundScene: BackgroundScene
+  setBackgroundScene: Dispatch<SetStateAction<BackgroundScene>>
+  selectedImage: string
+  setSelectedImage: Dispatch<SetStateAction<string>>
 }
 
 const defaultValues: TypeContext = {
@@ -42,6 +46,14 @@ const defaultValues: TypeContext = {
   setComplete: () => {
     // 何もしない
   },
+  backgroundScene: BackgroundScene.select,
+  setBackgroundScene: () => {
+    // 何もしない
+  },
+  selectedImage: '',
+  setSelectedImage: () => {
+    // 何もしない
+  },
 }
 
 const IndexContext = createContext(defaultValues)
@@ -58,6 +70,12 @@ const IndexContextProvider = ({
   )
   const [background, setBackground] = useState<string>(defaultValues.background)
   const [complete, setComplete] = useState<string>(defaultValues.complete)
+  const [backgroundScene, setBackgroundScene] = useState<BackgroundScene>(
+    defaultValues.backgroundScene,
+  )
+  const [selectedImage, setSelectedImage] = useState<string>(
+    defaultValues.selectedImage,
+  )
 
   const value: TypeContext = {
     scene,
@@ -70,6 +88,10 @@ const IndexContextProvider = ({
     setBackground,
     complete,
     setComplete,
+    backgroundScene,
+    setBackgroundScene,
+    selectedImage,
+    setSelectedImage,
   }
 
   return <IndexContext.Provider value={value}>{children}</IndexContext.Provider>

@@ -6,4 +6,10 @@ export const Scene = <const>{
   complete: 'complete',
 }
 
+export const BackgroundScene = <const>{
+  select: 'select',
+  edit: 'edit',
+}
+
 export type Scene = typeof Scene[keyof typeof Scene]
+export type BackgroundScene = typeof BackgroundScene[keyof typeof BackgroundScene]

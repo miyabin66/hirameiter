@@ -1,27 +1,9 @@
-import { Dispatch, SetStateAction, useCallback, useRef } from 'react'
+import useBackgroundSelect from '~/hooks/useBackgroundSelect'
 import style from '~/styles/background.module.scss'
 
-type Props = {
-  setScene: Dispatch<SetStateAction<string>>
-  setSelectedImage: Dispatch<SetStateAction<string | ArrayBuffer>>
-  setBackgroundScene: Dispatch<SetStateAction<string>>
-}
+const select = (): JSX.Element => {
+  const { imageInput, setImage, back } = useBackgroundSelect()
 
-const select = (props: Props): JSX.Element => {
-  const imageInput = useRef(null)
-  const setImage = useCallback(() => {
-    const image = imageInput.current.files[0]
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      props.setSelectedImage(e.target.result)
-      props.setBackgroundScene('edit')
-      imageInput.current.value = ''
-    }
-    reader.readAsDataURL(image)
-  }, [])
-  const backScene = useCallback(() => {
-    props.setScene('name')
-  }, [])
   return (
     <div>
       <p className={style.background__text}>
@@ -37,7 +19,7 @@ const select = (props: Props): JSX.Element => {
         onChange={setImage}
         ref={imageInput}
       />
-      <button className={style.background__select__button} onClick={backScene}>
+      <button className={style.background__select__button} onClick={back}>
         名前入力に戻る
       </button>
     </div>
