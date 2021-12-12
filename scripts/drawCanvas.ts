@@ -37,7 +37,7 @@ const drawCanvas = async ({
   })
 
   const scene = new Scene()
-  scene.background = new Color(0xff0000)
+  scene.background = new Color(0x000000)
 
   const camera = new PerspectiveCamera(90, CANVAS.width / CANVAS.height)
   camera.position.set(0, 0, CANVAS.height / 2)
