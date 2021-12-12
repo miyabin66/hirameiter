@@ -1,5 +1,5 @@
 @mixin pc-layout {
-  @media (min-width: $sp-max-width + 1) {
+  @media (min-width: ($sp-max-width + 1)) {
     @content;
   }
 }
@@ -17,7 +17,7 @@
   background-position: center;
   background-size: contain;
 
-  @media (min-width: $sp-max-width + 1) {
+  @media (min-width: ($sp-max-width + 1)) {
     background-image: image-url('pc/' + $path + '.' + $type);
   }
 
@@ -31,7 +31,7 @@
   background-position: center;
   background-size: contain;
 
-  @media (min-width: $sp-max-width + 1) {
+  @media (min-width: ($sp-max-width + 1)) {
     width: pc-convert($width / $scale);
     height: pc-convert($height / $scale);
     background-image: image-url('pc/' + $path + '.' + $type);
@@ -59,7 +59,7 @@
 @mixin vw-text ($font-size, $line-height, $scale: $design-scale) {
   line-height: $line-height;
 
-  @media (min-width: $sp-max-width + 1) {
+  @media (min-width: ($sp-max-width + 1)) {
     font-size: pc-convert($font-size / $scale);
   }
 
