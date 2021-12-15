@@ -9,6 +9,7 @@ import {
   PlaneGeometry,
   Shape,
   ExtrudeGeometry,
+  CanvasTexture,
 } from 'three'
 import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
@@ -156,7 +157,7 @@ const drawCanvas = async ({
     TEXT.posY + TEXT.fontSize * 3 + TEXT.lineHeight * 2,
   )
 
-  const texture_text = await readImage(canvas_text.toDataURL('image/png'))
+  const texture_text = new CanvasTexture(canvas_text)
   const geometry_text = new PlaneGeometry(canvas_text.width, canvas_text.height)
   const material_text = new MeshStandardMaterial({
     color: 0xffffff,
