@@ -2,7 +2,6 @@ import {
   WebGLRenderer,
   Scene,
   Color,
-  PerspectiveCamera,
   MeshStandardMaterial,
   Mesh,
   AmbientLight,
@@ -10,6 +9,7 @@ import {
   Shape,
   ExtrudeGeometry,
   CanvasTexture,
+  OrthographicCamera,
 } from 'three'
 import { Line2 } from 'three/examples/jsm/lines/Line2.js'
 import { LineMaterial } from 'three/examples/jsm/lines/LineMaterial.js'
@@ -40,7 +40,12 @@ const drawCanvas = async ({
   const scene = new Scene()
   scene.background = new Color(0x000000)
 
-  const camera = new PerspectiveCamera(90, CANVAS.width / CANVAS.height)
+  const camera = new OrthographicCamera(
+    -CANVAS.width / 2,
+    CANVAS.width / 2,
+    CANVAS.height / 2,
+    -CANVAS.height / 2,
+  )
   camera.position.set(0, 0, CANVAS.height / 2)
 
   const ambientLight = new AmbientLight(0xffffff)
